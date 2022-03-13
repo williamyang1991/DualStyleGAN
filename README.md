@@ -1,5 +1,6 @@
 # DualStyleGAN - Official PyTorch Implementation
 
+<img src="https://raw.githubusercontent.com/williamyang1991/GP-UNIT/main/doc_images/overview.jpg" width="96%" height="96%">
 
 This repository provides the official PyTorch implementation for the following paper:
 
@@ -41,7 +42,7 @@ In CVPR 2022.<br>
 
 If you find this work useful for your research, please consider citing our paper:
 
-```
+```bibtex
 @inproceedings{yang2022Pastiche,
   title={Pastiche Master: Exemplar-Based High-Resolution Portrait Style Transfer},
   author={Yang, Shuai and Jiang, Liming and Liu, Ziwei and Loy, Chen Change},
