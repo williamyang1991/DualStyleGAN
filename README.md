@@ -1,6 +1,6 @@
 # DualStyleGAN - Official PyTorch Implementation
 
-<img src="https://raw.githubusercontent.com/williamyang1991/GP-UNIT/main/doc_images/overview.jpg" width="96%" height="96%">
+<img src="./doc_images/overview.jpg" width="96%" height="96%">
 
 This repository provides the official PyTorch implementation for the following paper:
 
@@ -20,23 +20,18 @@ In CVPR 2022.<br>
 
 ## Results
 
-#### Male-to-Female: close domains
+#### Exemplar-based cartoon style trasnfer
 
-![male2female](./doc_images/5.gif)
+https://user-images.githubusercontent.com/18130694/158047991-77c31137-c077-415e-bae2-865ed3ec021f.mp4
 
-#### Dog-to-Cat: related domains 
+#### Exemplar-based caricature style trasnfer
 
-![cat2dog](./doc_images/3.gif)
+https://user-images.githubusercontent.com/18130694/158048107-7b0aa439-5e3a-45a9-be0e-91ded50e9136.mp4
 
-#### Dog-to-Human and Bird-to-Dog: distant domains  
+#### Exemplar-based anime style trasnfer
 
-![dog2human](./doc_images/4.gif)
+https://user-images.githubusercontent.com/18130694/158048114-237b8b81-eff3-4033-89f4-6e8a7bbf67f7.mp4
 
-![bird2dog](./doc_images/2.gif)
-
-#### Bird-to-Car: extremely distant domains for stress testing
-
-![bird2car](./doc_images/1.gif)
 
 ## Citation
 
