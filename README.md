@@ -21,8 +21,8 @@ Cartoon, Caricature and Anime datasets can be downloaded from their official pag
 | Dataset | Description |
 | :--- | :--- |
 | [Cartoon](https://mega.nz/file/HslSXS4a#7UBanJTjJqUl_2Z-JmAsreQYiJUKC-8UlZDR0rUsarw) | 317 cartoon face images from [Toonify](https://github.com/justinpinkney/toonify). |
-| [Caricature](https://cs.nju.edu.cn/rl/WebCaricature.htm) | 199 images from [WebCaricature](https://cs.nju.edu.cn/rl/WebCaricature.htm). Please refer to the [dataset preparation](./data_preparation) page for more details. |
-| [Anime](https://www.gwern.net/Crops#danbooru2019-portraits) | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to the [dataset preparation](./data_preparation) page for more details. |
+| [Caricature](https://cs.nju.edu.cn/rl/WebCaricature.htm) | 199 images from [WebCaricature](https://cs.nju.edu.cn/rl/WebCaricature.htm). Please refer to [dataset preparation](./data_preparation) for more details. |
+| [Anime](https://www.gwern.net/Crops#danbooru2019-portraits) | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to  [dataset preparation](./data_preparation) for more details. |
 
 ## Code
 
