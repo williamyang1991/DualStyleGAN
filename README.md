@@ -32,6 +32,10 @@ https://user-images.githubusercontent.com/18130694/158048107-7b0aa439-5e3a-45a9-
 
 https://user-images.githubusercontent.com/18130694/158048114-237b8b81-eff3-4033-89f4-6e8a7bbf67f7.mp4
 
+#### Other styles
+
+<img src="https://user-images.githubusercontent.com/18130694/158049559-5450568f-170d-4847-88e1-d9bd12901966.jpg" width="46%"><img src="https://user-images.githubusercontent.com/18130694/158049562-e9971b49-ebd9-4300-bd08-34fc2473729f.jpg" width="46%">
+<img src="https://user-images.githubusercontent.com/18130694/158049563-72718807-4bef-472d-8875-71eee22ae934.jpg" width="46%"><img src="https://user-images.githubusercontent.com/18130694/158049565-0322a005-c402-40bc-8bef-9b22a8ca3fd4.jpg" width="46%">
 
 ## Citation
 
