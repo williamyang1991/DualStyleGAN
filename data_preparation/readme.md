@@ -2,6 +2,8 @@
 
 ## Caricature Dataset
 
+![caricature_overview](https://user-images.githubusercontent.com/18130694/158067472-812df136-a4d2-485b-985c-09be27608fe3.jpg)
+
 ### Download
  
 Please download the raw data from [WebCaricature](https://cs.nju.edu.cn/rl/WebCaricature.htm).
