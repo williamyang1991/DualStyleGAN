@@ -14,6 +14,16 @@ In CVPR 2022.<br>
 
 - [03/2022] This website is created.
 
+## Dataset Preparation
+
+Cartoon, Caricature and Anime datasets can be downloaded from their official pages:
+
+| Dataset | Description |
+| :--- | :--- |
+| [Cartoon](https://mega.nz/file/HslSXS4a#7UBanJTjJqUl_2Z-JmAsreQYiJUKC-8UlZDR0rUsarw) | 317 cartoon face images from [Toonify](https://github.com/justinpinkney/toonify). |
+| [Caricature](https://cs.nju.edu.cn/rl/WebCaricature.htm) | 199 images from [WebCaricature](https://cs.nju.edu.cn/rl/WebCaricature.htm). Please refer to the [dataset preparation](./data_preparation) page for more details. |
+| [Anime](https://www.gwern.net/Crops#danbooru2019-portraits) | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to the [dataset preparation](./data_preparation) page for more details. |
+
 ## Code
 
 - We are cleaning our code. Coming soon. 
