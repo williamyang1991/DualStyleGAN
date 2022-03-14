@@ -118,4 +118,4 @@ python find_face_in_video.py
 
 * [arcane.txt](./arcane.txt): filenames of our filtered 100 arcane face images.
   - E.g. the filenames `1_016_04488.jpg` means the 16th detected faces, the 4488th frames of the Arcane Episode 1.
-* [pixar.txt](./pixar.txt): youtube video links where we use to collect Pixar face images.
+* [pixar.txt](./pixar.txt): youtube video links where we collected Pixar face images.
