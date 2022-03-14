@@ -114,7 +114,7 @@ def find_face(videoname, savename, detector, predictor):
     while success:
         i = i + 1
         success, frame = videoCapture.read()
-        if i % 24 > 0: # try to find face every 24 frames
+        if i % 24 > 0: # try to find a face every 24 frames
             continue
         # crop the black regions in the movie
         if black_width > 0:
