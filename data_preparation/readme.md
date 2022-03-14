@@ -1,4 +1,4 @@
-# Caricature and Anime Dataset Preparation
+# Dataset Preparation
 
 ## Caricature Dataset
 
@@ -66,3 +66,51 @@ python align_anime_data.py
 * We use waifu2x-converter-cpp.exe and the super resolution parameters:
 ```python
 .\waifu2x-converter-cpp --noise-level 1 -i Path_To_512_Images --scale-ratio 2 -r 1 -o Path_To_1024_Images -g 1 -a 0
+```
+
+<br/>
+
+## Build Your Own Dataset
+
+![arcane-overview](https://user-images.githubusercontent.com/18130694/158124926-2e53861d-3814-485d-ad9f-d45a339dd7fe.jpg)
+
+
+We use face detection and face alignment to automatically collect artistic face images from cartoon moives.
+
+Suitable for artistic portraits that look like real human faces.
+
+### Download
+ 
+Please download the source moive.
+
+Please download the face detection model:
+```python
+wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+bzip2 -dk shape_predictor_68_face_landmarks.dat.bz2
+```
+### Face Detection and Alignment
+
+* Specify the file name of the images to be saved in Line 15 of [find_face_in_video.py](./find_face_in_video.py).
+* Specify the file path to the moive in Line 16 of [find_face_in_video.py](./find_face_in_video.py).
+* Specify the folder path to save the found face images in Line 17 of [find_face_in_video.py](./find_face_in_video.py).
+* Specify the model path to the downloaded shape_predictor_68_face_landmarks.dat in Line 18 of [find_face_in_video.py](./find_face_in_video.py).
+* Specify the length of the black letterboxing of the moive in Line 19 of [find_face_in_video.py](./find_face_in_video.py).
+* Run the script [find_face_in_video.py](./find_face_in_video.py) to find and crop aligned 512\*512 face images. 
+```python
+python find_face_in_video.py
+```
+
+### Face Super-Resolution
+
+* Mannually filter wrong detections and low-quality ones.
+* Upsample the filtered images to 1024\*1024 by applying [waifu2x](https://github.com/YukihoAA/waifu2x_snowshell/releases).
+* We use waifu2x-converter-cpp.exe and the super resolution parameters:
+```python
+.\waifu2x-converter-cpp --noise-level 1 -i Path_To_512_Images --scale-ratio 2 -r 1 -o Path_To_1024_Images -g 1 -a 0
+```
+
+### Useful Resources
+
+* [arcane.txt](./arcane.txt): filenames of our filtered 100 arcane face images.
+  - E.g. the filenames `1_016_04488.jpg` means the 16th founded faces, the 4488th frames of the Arcane Episode 1.
+* [pixar.txt](./pixar.txt): youtube video links where we use to collect Pixar face images.
