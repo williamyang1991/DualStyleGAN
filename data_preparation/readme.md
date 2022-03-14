@@ -75,7 +75,7 @@ python align_anime_data.py
 ![arcane-overview](https://user-images.githubusercontent.com/18130694/158124926-2e53861d-3814-485d-ad9f-d45a339dd7fe.jpg)
 
 
-We use face detection and face alignment to automatically collect artistic face images from cartoon moives.
+We use face detection and face alignment to automatically collect artistic face images from cartoon moives like [Arcane](https://www.netflix.com/sg/title/81435684?source=35).
 
 Suitable for artistic portraits that look like real human faces.
 
