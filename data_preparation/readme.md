@@ -102,12 +102,17 @@ python find_face_in_video.py
 
 ### Face Super-Resolution
 
-* Mannually filter wrong detections and low-quality ones.
-* Upsample the filtered images to 1024\*1024 by applying [waifu2x](https://github.com/YukihoAA/waifu2x_snowshell/releases).
+* Upsample the images to 1024\*1024 by applying [waifu2x](https://github.com/YukihoAA/waifu2x_snowshell/releases).
 * We use waifu2x-converter-cpp.exe and the super resolution parameters:
 ```python
 .\waifu2x-converter-cpp --noise-level 1 -i Path_To_512_Images --scale-ratio 2 -r 1 -o Path_To_1024_Images -g 1 -a 0
 ```
+
+### Optional Post-Processing
+
+* Mannually filter wrong detections and low-quality ones.
+* Use PhotoShop to [remove motion blurs](https://helpx.adobe.com/sg/photoshop/using/reduce-camera-shake-induced-blurring.html) in movies.
+* Adjust color and tone of the dark images.
 
 ### Useful Resources
 
