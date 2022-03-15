@@ -42,6 +42,21 @@ Pretrained models can be downloaded from Google Drive or Baidu Cloud:
 | pixar | DualStyleGAN model and sampling model trained on Pixar dataset, 122 extrinsic style codes |
 | slamdunk | DualStyleGAN model and sampling model trained on Slamdunk dataset, 120 extrinsic style codes |
 
+The saved checkpoints is under the following folder structure:
+```
+Checkpoint
+|--stylegan2-ffhq-config-f.pt     % StyleGAN model
+|--encoder.pt                     % Pixel2style2pixel model
+|--cartoon
+    |--generator.pt               % DualStyleGAN model
+    |--sampler.pt                 % The extrinsic style code sampling model
+    |--exstyle_code.npy           % extrinsic style codes of Cartoon dataset
+    |--refined_exstyle_code.npy   % refined extrinsic style codes of Cartoon dataset
+|--caricature
+    % the same files as in Cartoon
+...
+```
+
 ## Training Code
 
 - We are cleaning our code. Coming soon. 
