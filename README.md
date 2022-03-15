@@ -26,7 +26,23 @@ We also provide the script to build new datasets.
 | Anime | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to  [dataset preparation](./data_preparation/readme.md#anime-dataset) for more details. |
 | Other styles | Please refer to  [dataset preparation](./data_preparation/readme.md#build-your-own-dataset) for the way of building new datasets. |
 
-## Code
+## Inference for Style Transfer and Artistic Portrait Generation
+
+Pretrained models can be downloaded from Google Drive or Baidu Cloud:
+
+| Model | Description |
+| :--- | :--- |
+| stylegan | original StyleGAN2 model trained on FFHQ |
+| encoder | Pixel2style2pixel encoder that embeds FFHQ images into StyleGAN2 Z+ latent code |
+| cartoon | DualStyleGAN model and sampling model trained on Cartoon dataset, 317 (refined) extrinsic style codes |
+| caricature | DualStyleGAN model and sampling model trained on Caricature dataset, 199 (refined) extrinsic style codes |
+| anime | DualStyleGAN model and sampling model trained on Anime dataset, 174 (refined) extrinsic style codes |
+| arcane | DualStyleGAN model and sampling model trained on Arcane dataset, 100 extrinsic style codes |
+| comic | DualStyleGAN model and sampling model trained on Comic dataset, 101 extrinsic style codes |
+| pixar | DualStyleGAN model and sampling model trained on Pixar dataset, 122 extrinsic style codes |
+| slamdunk | DualStyleGAN model and sampling model trained on Slamdunk dataset, 120 extrinsic style codes |
+
+## Training Code
 
 - We are cleaning our code. Coming soon. 
 
