@@ -32,7 +32,7 @@ Pretrained models can be downloaded from Google Drive or Baidu Cloud:
 
 | Model | Description |
 | :--- | :--- |
-| stylegan | original StyleGAN2 model trained on FFHQ |
+| [stylegan](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
 | encoder | Pixel2style2pixel encoder that embeds FFHQ images into StyleGAN2 Z+ latent code |
 | cartoon | DualStyleGAN model and sampling model trained on Cartoon dataset, 317 (refined) extrinsic style codes |
 | caricature | DualStyleGAN model and sampling model trained on Caricature dataset, 199 (refined) extrinsic style codes |
