@@ -68,7 +68,7 @@ python generate.py --style arcane --name arcane_generate
 
 Specify the weight to adjust the degree of style with `--weight.
 
-Keep the intrinsic style code/extrinsic color and strcture code fixed using `--fix_content`, `--fix_color` and `--fix_structure`, respectively.
+Keep the intrinsic style code, extrinsic color code or extrinsic strcture code fixed using `--fix_content`, `--fix_color` and `--fix_structure`, respectively.
 ```python
 python generate.py --style caricature --name caricature_generate --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 --fix_content
 ```
