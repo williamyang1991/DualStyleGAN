@@ -77,7 +77,7 @@ python style_transfer.py --style anime --name anime_transfer --style_id 17 --wei
 python style_transfer.py --style anime --name anime_transfer --style_id 48 --weight 0 0 0 0 0.75 0.75 0.75 1 1 1 1 1 1 1 1 1 1 1
 ```
 
-Specify the content image with `--content`. If the content image is not well aligned with FFHQ, use `--align_face`. For preserving the color style of the content image, use `--preserve_color`
+Specify the content image with `--content`. If the content image is not well aligned with FFHQ, use `--align_face`. For preserving the color style of the content image, use `--preserve_color` or set the last 11 elements of `--weight` to all zeros.
 ```python
 python style_transfer.py --content ./data/content/unsplash-rDEOVtE7vOs.jpg --align_face --preserve_color \
        --style arcane --name arcane_transfer --style_id 13 \
