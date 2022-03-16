@@ -28,24 +28,22 @@ We also provide the script to build new datasets.
 
 ## Inference for Style Transfer and Artistic Portrait Generation
 
-Pretrained models can be downloaded from Google Drive or Baidu Cloud:
+Pretrained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or Baidu Cloud:
 
 | Model | Description |
 | :--- | :--- |
-| [stylegan](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
-| encoder | Pixel2style2pixel encoder that embeds FFHQ images into StyleGAN2 Z+ latent code |
-| cartoon | DualStyleGAN and sampling models trained on Cartoon dataset, 317 (refined) extrinsic style codes |
-| caricature | DualStyleGAN and sampling models trained on Caricature dataset, 199 (refined) extrinsic style codes |
-| anime | DualStyleGAN and sampling models trained on Anime dataset, 174 (refined) extrinsic style codes |
-| arcane | DualStyleGAN and sampling models trained on Arcane dataset, 100 extrinsic style codes |
-| comic | DualStyleGAN and sampling models trained on Comic dataset, 101 extrinsic style codes |
-| pixar | DualStyleGAN and sampling models trained on Pixar dataset, 122 extrinsic style codes |
-| slamdunk | DualStyleGAN and sampling models trained on Slamdunk dataset, 120 extrinsic style codes |
+| [encoder](https://drive.google.com/file/d/1NgI4mPkboYvYw3MWcdUaQhkr0OWgs9ej/view?usp=sharing) | Pixel2style2pixel encoder that embeds FFHQ images into StyleGAN2 Z+ latent code |
+| [cartoon](https://drive.google.com/drive/folders/1xPo8PcbMXzcUyvwe5liJrfbA5yx4OF1j?usp=sharing) | DualStyleGAN and sampling models trained on Cartoon dataset, 317 (refined) extrinsic style codes |
+| [caricature](https://drive.google.com/drive/folders/1BwLXWkSyWDApblBPvaHKsRCTqnhiHxUZ?usp=sharing) | DualStyleGAN and sampling models trained on Caricature dataset, 199 (refined) extrinsic style codes |
+| [anime](https://drive.google.com/drive/folders/1YvFj33Bfum4YuBeqNNCYLfiBrD4tpzg7?usp=sharing) | DualStyleGAN and sampling models trained on Anime dataset, 174 (refined) extrinsic style codes |
+| [arcane](https://drive.google.com/drive/folders/1-MYwaEQthhAJ_ScWVb0LOQiVkKeSzpBm?usp=sharing) | DualStyleGAN and sampling models trained on Arcane dataset, 100 extrinsic style codes |
+| [comic](https://drive.google.com/drive/folders/1qC2onFGs2R-XCXRQTP_yyNbY1fT0BdZG?usp=sharing) | DualStyleGAN and sampling models trained on Comic dataset, 101 extrinsic style codes |
+| [pixar](https://drive.google.com/drive/folders/1ve4P8Yb4EZ9g_sRy_RCw3N74p46tNpeW?usp=sharing) | DualStyleGAN and sampling models trained on Pixar dataset, 122 extrinsic style codes |
+| [slamdunk](https://drive.google.com/drive/folders/1X345yn_YbMEHBcj7K91O-oQZ2YjVpAcI?usp=sharing) | DualStyleGAN and sampling models trained on Slamdunk dataset, 120 extrinsic style codes |
 
 The saved checkpoints is under the following folder structure:
 ```
 Checkpoint
-|--stylegan2-ffhq-config-f.pt     % StyleGAN model
 |--encoder.pt                     % Pixel2style2pixel model
 |--cartoon
     |--generator.pt               % DualStyleGAN model
@@ -60,6 +58,8 @@ Checkpoint
 ## Training Code
 
 - We are cleaning our code. Coming soon. 
+
+| [stylegan](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
 
 ## Results
 
