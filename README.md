@@ -70,7 +70,7 @@ Specify the style image with `--style` and `--style_id` (find the mapping betwee
 The following script generates the style transfer results in the teaser. 
 ```python
 python style_transfer.py
-python style_transfer.py --style cartoon --name cartoon_transfer --style_id 10
+python style_transfer.py --style cartoon --style_id 10
 python style_transfer.py --style caricature --name caricature_transfer --style_id 0 --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 python style_transfer.py --style caricature --name caricature_transfer --style_id 187 --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 python style_transfer.py --style anime --name anime_transfer --style_id 17 --weight 0 0 0 0 0.75 0.75 0.75 1 1 1 1 1 1 1 1 1 1 1
