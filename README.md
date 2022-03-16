@@ -55,6 +55,27 @@ Checkpoint
 ...
 ```
 
+### Artistic Portrait Generation
+Generate random Cartoon face images: (Results are saved in the `./output/` folder)
+```python
+python generate.py 
+```
+
+Specify the style type with `--style` and the filename of the saved images with `--name`
+```python
+python generate.py --style arcane --name arcane_generate
+```
+
+Specify the weight to adjust the degree of style with `--weight.
+
+Keep the intrinsic style code/extrinsic color and strcture code fixed using `--fix_content`, `--fix_color` and `--fix_structure`, respectively.
+```python
+python generate.py --style caricature --name caricature_generate --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 --fix_content
+```
+
+Find more options via `python generate.py -h`
+
+
 ## Training Code
 
 - We are cleaning our code. Coming soon. 
