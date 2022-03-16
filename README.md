@@ -55,6 +55,42 @@ Checkpoint
 ...
 ```
 
+### Exemplar-Based Style Transfer
+Transfer the style of a default Cartoon image onto a default face:
+```python
+python style_transfer.py 
+```
+The result `cartoon_transfer_53_081680.jpg` are saved in the folder `.\output\`,
+where `53` is the id of the style image in Cartoon dataset, `081680` is the name of the content face image.
+An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is additionally saved to illustrate the input content image, the encoded content image, the style image and the result: (* the style image will be shown only if it is in your folder)
+
+<img src="./output/cartoon_transfer_53_081680_overview.jpg">
+
+Specify the style image with `--style` and `--style_id`. Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight.
+The following script generates the style transfer results in the teaser. 
+```python
+python style_transfer.py
+python style_transfer.py --style cartoon --name cartoon_transfer --style_id 10
+python style_transfer.py --style caricature --name caricature_transfer --style_id 0 --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+python style_transfer.py --style caricature --name caricature_transfer --style_id 187 --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+python style_transfer.py --style anime --name anime_transfer --style_id 17 --weight 0 0 0 0 0.75 0.75 0.75 1 1 1 1 1 1 1 1 1 1 1
+python style_transfer.py --style anime --name anime_transfer --style_id 48 --weight 0 0 0 0 0.75 0.75 0.75 1 1 1 1 1 1 1 1 1 1 1
+```
+
+Specify the content image with `--content`. If the content image is not well aligned with FFHQ, use `--align_face`. For preserving the color style of the content image, use `--preserve_color`
+```python
+python style_transfer.py --content ./data/content/unsplash-rDEOVtE7vOs.jpg --align_face --preserve_color \
+       --style arcane --name arcane_transfer --style_id 13 \
+       --weight 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 1 1 1 1 1 1 1 
+```
+
+<img src="./output/arcane_transfer_13_unsplash-rDEOVtE7vOs_overview.jpg">
+
+Find more options via `python style_transfer.py  -h`
+
+
+**Remarks**: The pSp encoder cannot perfectly encode the content image. If the style transfer result more consistent with the content image is desired, one may use latent optimization to better fit the content image or using newer StyleGAN encoders.
+
 ### Artistic Portrait Generation
 Generate random Cartoon face images: (Results are saved in the `./output/` folder)
 ```python
@@ -74,7 +110,6 @@ python generate.py --style caricature --name caricature_generate --weight 1 1 1 
 ```
 
 Find more options via `python generate.py -h`
-
 
 ## Training Code
 
