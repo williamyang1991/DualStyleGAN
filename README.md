@@ -28,7 +28,7 @@ We also provide the script to build new datasets.
 
 ## Inference for Style Transfer and Artistic Portrait Generation
 
-Pretrained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or Baidu Cloud:
+Pretrained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr):
 
 | Model | Description |
 | :--- | :--- |
