@@ -84,7 +84,7 @@ Suitable for artistic portraits that look like real human faces.
 Please download the source moive.
 
 Please download the face detection model:
-```python
+```bash
 wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 bzip2 -dk shape_predictor_68_face_landmarks.dat.bz2
 ```
