@@ -67,7 +67,7 @@ An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is add
 <img src="./output/cartoon_transfer_53_081680_overview.jpg">
 
 Specify the style image with `--style` and `--style_id` (find the mapping between id and filename [here](./data_preparation/id_filename_list.txt)). Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight`.
-The following script generates the style transfer results in the teaser. 
+The following script generates the style transfer results in the teaser of the paper. 
 ```python
 python style_transfer.py
 python style_transfer.py --style cartoon --style_id 10
