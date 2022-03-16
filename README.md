@@ -66,7 +66,7 @@ An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is add
 
 <img src="./output/cartoon_transfer_53_081680_overview.jpg">
 
-Specify the style image with `--style` and `--style_id`. Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight.
+Specify the style image with `--style` and `--style_id`. Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight`.
 The following script generates the style transfer results in the teaser. 
 ```python
 python style_transfer.py
@@ -102,7 +102,7 @@ Specify the style type with `--style` and the filename of the saved images with 
 python generate.py --style arcane --name arcane_generate
 ```
 
-Specify the weight to adjust the degree of style with `--weight.
+Specify the weight to adjust the degree of style with `--weight`.
 
 Keep the intrinsic style code, extrinsic color code or extrinsic strcture code fixed using `--fix_content`, `--fix_color` and `--fix_structure`, respectively.
 ```python
