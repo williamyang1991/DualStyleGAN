@@ -62,11 +62,10 @@ python style_transfer.py
 ```
 The result `cartoon_transfer_53_081680.jpg` are saved in the folder `.\output\`,
 where `53` is the id of the style image in Cartoon dataset, `081680` is the name of the content face image.
-An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is additionally saved to illustrate the input content image, the encoded content image, the style image and the result: (* the style image will be shown only if it is in your folder)
-
+An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is additionally saved to illustrate the input content image, the encoded content image, the style image (* the style image will be shown only if it is in your folder) and the result: 
 <img src="./output/cartoon_transfer_53_081680_overview.jpg">
 
-Specify the style image with `--style` and `--style_id`. Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight`.
+Specify the style image with `--style` and `--style_id` (find the mapping between id and filename [here](./data_preparation/id_filename_list.txt)). Specify the filename of the saved images with `--name`. Specify the weight to adjust the degree of style with `--weight`.
 The following script generates the style transfer results in the teaser. 
 ```python
 python style_transfer.py
