@@ -22,6 +22,7 @@ class TestOptions():
         self.parser.add_argument("--name", type=str, default='cartoon_transfer', help="filename to save the generated images")
         self.parser.add_argument("--preserve_color", action="store_true", help="preserve the color of the content image")
         self.parser.add_argument("--model_path", type=str, default='./checkpoint/', help="path of the saved models")
+        self.parser.add_argument("--model_name", type=str, default='generator.pt', help="name of the saved dualstylegan")
         self.parser.add_argument("--output_path", type=str, default='./output/', help="path of the output images")
         self.parser.add_argument("--data_path", type=str, default='./data/', help="path of dataset")
         self.parser.add_argument("--align_face", action="store_true", help="apply face alignment to the content image")
@@ -65,7 +66,7 @@ if __name__ == "__main__":
     generator = DualStyleGAN(1024, 512, 8, 2, res_index=6).to(device)
     generator.eval()
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, 'generator.pt'))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name))
     generator.load_state_dict(ckpt["g_ema"])
 
     model_path = os.path.join(args.model_path, 'encoder.pt')
