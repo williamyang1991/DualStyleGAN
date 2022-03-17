@@ -43,7 +43,7 @@ Pretrained models can be downloaded from [Google Drive](https://drive.google.com
 
 The saved checkpoints is under the following folder structure:
 ```
-Checkpoint
+checkpoint
 |--encoder.pt                     % Pixel2style2pixel model
 |--cartoon
     |--generator.pt               % DualStyleGAN model
@@ -113,9 +113,38 @@ Find more options via `python generate.py -h`
 
 ## Training Code
 
+Download the supporting models:
+
+| Model | Description |
+| :--- | :--- |
+| [stylegan2-ffhq-config-f.pt](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
+
+### Facial Destylization
+
+**Step 1 Prepare data.** Prepare the dataset in `./data/DatasetName/images/train/`. First create lmdb datasets:
+```python
+python ./model/stylegan/prepare_data.py --out LMDB_PATH --n_worker N_WORKER --size SIZE1,SIZE2,SIZE3,... DATASET_PATH
+```
+For example, download 317 Cartoon images into `./data/cartoon/images/train/` and run 
+> python prepare_data.py ./model/stylegan/prepare_data.py --out ./data/cartoon/lmdb/ --n_worker 4 --size 1024 ./data/cartoon/images/
+
+**Step 2 Fine-tune StyleGAN.** Fine-tune StyleGAN in distributed settings
+```python
+python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT train_stylegan.py --batch BATCH_SIZE \
+       --ckpt FFHQ_MODEL_PATH --iter ITERATIONS --name DATASET_NAME --augment LMDB_PATH
+```
+Take the cartoon dataset as example, run (batch size of 8\*4=32 is recommended)
+> python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 train_stylegan.py --iter 600
+                          --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt --name cartoon
+                          --augment ./data/cartoon/lmdb/
+
+The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
+
+**Step 3 Destylize Artistic Portraits.** 
+
 - We are cleaning our code. Coming soon. 
 
-| [stylegan](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
+
 
 ## Results
 
