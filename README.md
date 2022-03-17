@@ -151,6 +151,8 @@ The intrisic style codes are saved in `./checkpoint/cartoon/instyle_code.npy`. I
 To speed up destylization, set `--batch` to large value like 16. 
 For styles severely different from real faces, set `--truncation` to small value like 0.5 to make the results more photo-realistic.
 
+### Progressive Fine-Tuning 
+
 - We are cleaning our code. Coming soon. 
 
 
