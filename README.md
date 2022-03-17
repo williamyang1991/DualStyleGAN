@@ -133,14 +133,23 @@ For example, download 317 Cartoon images into `./data/cartoon/images/train/` and
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --batch BATCH_SIZE \
        --ckpt FFHQ_MODEL_PATH --iter ITERATIONS --name DATASET_NAME --augment LMDB_PATH
 ```
-Take the cartoon dataset as example, run (batch size of 8\*4=32 is recommended)
+Take the cartoon dataset for example, run (batch size of 8\*4=32 is recommended)
 > python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_stylegan.py --iter 600
                           --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt --name cartoon
                           --augment ./data/cartoon/lmdb/
 
 The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
 
-**Step 3 Destylize Artistic Portraits.** 
+**Step 3 Destylize artistic portraits.** 
+```python
+python destylize.py --style DATASET_NAME --model_name FINETUNED_MODEL_NAME --batch BATCH_SIZE --iter ITERATIONS 
+```
+Take the cartoon dataset for example, run
+> python destylize.py --style cartoon --model_name fintune-000600.pt --batch 1 --iter 300
+
+The intrisic style codes are saved in `./checkpoint/cartoon/instyle_code.npy`. Intermediate results are saved in `./log/cartoon/destylization/`.
+To speed up destylization, set `--batch` to large value like 16. 
+For styles severely different from real faces, set `--truncation` to small value like 0.5 to make the results more photo-realistic.
 
 - We are cleaning our code. Coming soon. 
 
