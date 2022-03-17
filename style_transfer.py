@@ -38,7 +38,14 @@ class TestOptions():
 def run_alignment(args):
     import dlib
     from model.encoder.align_all_parallel import align_face
-    predictor = dlib.shape_predictor(os.path.join(args.model_path, 'shape_predictor_68_face_landmarks.dat'))
+    modelname = os.path.join(args.model_path, 'shape_predictor_68_face_landmarks.dat')
+    if not os.path.exists(modelname):
+        import wget, bz2
+        wget.download('http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2', modelname+'.bz2')
+        zipfile = bz2.BZ2File(modelname+'.bz2')
+        data = zipfile.read()
+        open(modelname, 'wb').write(data) 
+    predictor = dlib.shape_predictor(modelname)
     aligned_image = align_face(filepath=args.content, predictor=predictor)
     return aligned_image
 
