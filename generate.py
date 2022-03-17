@@ -19,6 +19,7 @@ class TestOptions():
         self.parser.add_argument("--fix_color", action="store_true", help="using a fixed extrinsic color code (style)")
         self.parser.add_argument("--fix_structure", action="store_true", help="using a fixed extrinsic structure code (style")
         self.parser.add_argument("--model_path", type=str, default='./checkpoint/', help="path of the saved models")
+        self.parser.add_argument("--model_name", type=str, default='generator.pt', help="name of the saved dualstylegan")
         self.parser.add_argument("--output_path", type=str, default='./output/', help="path of the output images")
 
 
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     icptc = ICPTrainer(np.empty([0,512*11]), 128)
     icpts = ICPTrainer(np.empty([0,512*7]), 128)
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, 'generator.pt'))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name))
     generator.load_state_dict(ckpt["g_ema"])
 
     ckpt = torch.load(os.path.join(args.model_path, args.style, 'sampler.pt'))
