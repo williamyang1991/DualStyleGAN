@@ -107,8 +107,8 @@ if __name__ == "__main__":
             exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)
 
         S = None
-        if os.path.exists(os.path.join(args.data_path, args.style, 'train', stylename)):
-            S = load_image(os.path.join(args.data_path, args.style, 'train', stylename)).to(device)
+        if os.path.exists(os.path.join(args.data_path, args.style, 'images/train', stylename)):
+            S = load_image(os.path.join(args.data_path, args.style, 'images/train', stylename)).to(device)
             viz += [S]
 
         img_gen, _ = generator([instyle], exstyle, input_is_latent=False, z_plus_latent=True,
