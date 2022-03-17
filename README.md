@@ -113,11 +113,12 @@ Find more options via `python generate.py -h`
 
 ## (3) Training DualStyleGAN
 
-Download the supporting models:
+Download the supporting models to the `./checkpoint/` folder:
 
 | Model | Description |
 | :--- | :--- |
-| [stylegan2-ffhq-config-f.pt](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch), provided from [pixel2style2pixel](https://github.com/eladrich/pixel2style2pixel#pretrained-models). |
+| [stylegan2-ffhq-config-f.pt](https://drive.google.com/file/d/1EM87UquaoQmk17Q8d5kYIAHqu0dkYqdT/view) | StyleGAN model trained on FFHQ taken from [rosinality](https://github.com/rosinality/stylegan2-pytorch). |
+| [model_ir_se50.pth](https://drive.google.com/file/d/1KW7bjndL3QG3sxBbZxreGHigcCCpsDgn/view?usp=sharing) | Pretrained IR-SE50 model taken from [TreB1eN](https://github.com/TreB1eN/InsightFace_Pytorch) for ID loss. |
 
 ### Facial Destylization
 
