@@ -14,7 +14,7 @@ In CVPR 2022.<br>
 
 - [03/2022] This website is created.
 
-## Dataset Preparation
+## (1) Dataset Preparation
 
 Cartoon, Caricature and Anime datasets can be downloaded from their official pages.
 We also provide the script to build new datasets.
@@ -26,7 +26,7 @@ We also provide the script to build new datasets.
 | Anime | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to  [dataset preparation](./data_preparation/readme.md#anime-dataset) for more details. |
 | Other styles | Please refer to  [dataset preparation](./data_preparation/readme.md#build-your-own-dataset) for the way of building new datasets. |
 
-## Inference for Style Transfer and Artistic Portrait Generation
+## (2) Inference for Style Transfer and Artistic Portrait Generation
 
 Pretrained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr):
 
@@ -111,7 +111,7 @@ python generate.py --style caricature --name caricature_generate --weight 1 1 1 
 
 Find more options via `python generate.py -h`
 
-## Training Code
+## (3) Training DualStyleGAN
 
 Download the supporting models:
 
@@ -146,7 +146,7 @@ The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. I
 
 
 
-## Results
+## (4) Results
 
 #### Exemplar-based cartoon style trasnfer
 
