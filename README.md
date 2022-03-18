@@ -157,8 +157,7 @@ For styles severely different from real faces, set `--truncation` to small value
 **Stage 1 & 2 Pretrain DualStyleGAN on FFHQ.** 
 We provide our pretrained model `generator-pretrain.pt` at [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr). This model is obtained by:
 > python -m torch.distributed.launch --nproc_per_node=1 --master_port=8765 pretrain_dualstylegan.py --iter 3000
-                          --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt
-                          --encoder_path ./checkpoint/encoder.pt ./data/ffhq/lmdb/
+                          --batch 4 ./data/ffhq/lmdb/
 
 where `./data/ffhq/lmdb/` contains the lmdb data created from FFHQ dataset via `./model/stylegan/prepare_data.py`.
 
