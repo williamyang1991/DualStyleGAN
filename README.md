@@ -132,11 +132,11 @@ For example, download 317 Cartoon images into `./data/cartoon/images/train/` and
 **Step 2 Fine-tune StyleGAN.** Fine-tune StyleGAN in distributed settings
 ```python
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --batch BATCH_SIZE \
-       --ckpt FFHQ_MODEL_PATH --iter ITERATIONS --name DATASET_NAME --augment LMDB_PATH
+       --ckpt FFHQ_MODEL_PATH --iter ITERATIONS --style DATASET_NAME --augment LMDB_PATH
 ```
 Take the cartoon dataset for example, run (batch size of 8\*4=32 is recommended)
 > python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_stylegan.py --iter 600
-                          --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt --name cartoon
+                          --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt --style cartoon
                           --augment ./data/cartoon/lmdb/
 
 The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
