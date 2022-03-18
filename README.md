@@ -166,10 +166,15 @@ where `./data/ffhq/lmdb/` contains the lmdb data created from FFHQ dataset via `
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --iter ITERATIONS \ 
                           --batch BATCH_SIZE --ckpt PRETRAINED_MODEL_PATH --augment DATASET_NAME
 ```
-The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>).
-Take the cartoon dataset for example, run (multi-GPU enables large batch size of 8\*4=32 for better performance)
+The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). Find more options via `python finetune_dualstylegan.py -h`.
+
+Take the cartoon dataset for example, run (multi-GPU enables a large batch size of 8\*4=32 for better performance):
 > python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_dualstylegan.py --iter 1400 --batch 4 --ckpt ./checkpoint/generator-pretrain.pt 
 --style_loss 0.25 --CX_loss 0.25 --perc_loss 1 --id_loss 1 --L2_reg_loss 0.015 --augment cartoon
+
+The fine-tuned model can be found in `./checkpoint/cartoon/generator-001400.pt`. Intermediate results are saved in `./log/cartoon/`.
+
+
 
 ### (optional) Latent Optimization and Sampling
 
