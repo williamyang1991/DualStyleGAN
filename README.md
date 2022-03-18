@@ -180,7 +180,12 @@ The fine-tuned model can be found in `./checkpoint/cartoon/generator-001400.pt`.
 
 **Refine extrinsic style code.** 
 
-**Training style code sampling network.** 
+**Training sampling network.** Train a sampling network to map unit Gaussian noises to the distribution of extrinsic style codes:
+```python
+python train_sampler.py --style DATASET_NAME --exstyle_path EXTRINSIC_STYLE_PATH
+```
+If `--exstyle_path` is not specified, the code will use `refined_exstyle_code.npy` or `exstyle_code.npy` in `./checkpoint/DATASET_NAME/`.
+The saved model can be found in `./checkpoint/DATASET_NAME/sampler.pt`.
 
 - We are cleaning our code. Coming soon. 
 
