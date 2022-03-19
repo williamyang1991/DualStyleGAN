@@ -14,6 +14,7 @@ In CVPR 2022.<br>
 
 - [03/2022] This website is created.
 
+
 ## (1) Dataset Preparation
 
 Cartoon, Caricature and Anime datasets can be downloaded from their official pages.
@@ -25,6 +26,8 @@ We also provide the script to build new datasets.
 | Caricature | 199 images from [WebCaricature](https://cs.nju.edu.cn/rl/WebCaricature.htm). Please refer to [dataset preparation](./data_preparation/readme.md#caricature-dataset) for more details. |
 | Anime | 174 images from [Danbooru Portraits](https://www.gwern.net/Crops#danbooru2019-portraits). Please refer to  [dataset preparation](./data_preparation/readme.md#anime-dataset) for more details. |
 | Other styles | Please refer to  [dataset preparation](./data_preparation/readme.md#build-your-own-dataset) for the way of building new datasets. |
+
+<br/>
 
 ## (2) Inference for Style Transfer and Artistic Portrait Generation
 
@@ -111,6 +114,8 @@ python generate.py --style caricature --name caricature_generate --weight 1 1 1 
 
 Find more options via `python generate.py -h`
 
+<br/>
+
 ## (3) Training DualStyleGAN
 
 Download the supporting models to the `./checkpoint/` folder:
@@ -155,7 +160,7 @@ For styles severely different from real faces, set `--truncation` to small value
 ### Progressive Fine-Tuning 
 
 **Stage 1 & 2 Pretrain DualStyleGAN on FFHQ.** 
-We provide our pretrained model `generator-pretrain.pt` at [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr). This model is obtained by:
+We provide our pretrained model [generator-pretrain.pt](https://drive.google.com/file/d/1j8sIvQZYW5rZ0v1SDMn2VEJFqfRjMW3f/view?usp=sharing) at [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr). This model is obtained by:
 > python -m torch.distributed.launch --nproc_per_node=1 --master_port=8765 pretrain_dualstylegan.py --iter 3000
                           --batch 4 ./data/ffhq/lmdb/
 
@@ -169,11 +174,10 @@ python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT fin
 The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). Find more options via `python finetune_dualstylegan.py -h`.
 
 Take the cartoon dataset for example, run (multi-GPU enables a large batch size of 8\*4=32 for better performance):
-> python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_dualstylegan.py --iter 1400 --batch 4 --ckpt ./checkpoint/generator-pretrain.pt 
+> python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_dualstylegan.py --iter 1500 --batch 4 --ckpt ./checkpoint/generator-pretrain.pt 
 --style_loss 0.25 --CX_loss 0.25 --perc_loss 1 --id_loss 1 --L2_reg_loss 0.015 --augment cartoon
 
-The fine-tuned model can be found in `./checkpoint/cartoon/generator-001400.pt`. Intermediate results are saved in `./log/cartoon/`.
-
+The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` where ITER = 001000, 001100, ..., 001500. Intermediate results are saved in `./log/cartoon/`. Large ITER has strong cartoon styles but at the cost of artifacts, users may select the most balanced one from 1000-1500. In the paper, we use 1400.
 
 
 ### (optional) Latent Optimization and Sampling
@@ -187,9 +191,7 @@ python train_sampler.py --style DATASET_NAME --exstyle_path EXTRINSIC_STYLE_PATH
 If `--exstyle_path` is not specified, the code will use `refined_exstyle_code.npy` or `exstyle_code.npy` in `./checkpoint/DATASET_NAME/`.
 The saved model can be found in `./checkpoint/DATASET_NAME/sampler.pt`.
 
-- We are cleaning our code. Coming soon. 
-
-
+<br/>
 
 ## (4) Results
 
