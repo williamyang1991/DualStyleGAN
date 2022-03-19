@@ -172,15 +172,13 @@ where `./data/ffhq/lmdb/` contains the lmdb data created from FFHQ dataset via `
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --iter ITERATIONS \ 
                           --batch BATCH_SIZE --ckpt PRETRAINED_MODEL_PATH --augment DATASET_NAME
 ```
-The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). Find more options via `python finetune_dualstylegan.py -h`.
+The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). λ<sub>ID</sub> and λ<sub>reg</sub> are suggested to be tuned for each style dataset to achieve ideal performance. Find more options via `python finetune_dualstylegan.py -h`.
 
 Take the cartoon dataset for example, run (multi-GPU enables a large batch size of 8\*4=32 for better performance):
 > python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_dualstylegan.py --iter 1500 --batch 4 --ckpt ./checkpoint/generator-pretrain.pt 
 --style_loss 0.25 --CX_loss 0.25 --perc_loss 1 --id_loss 1 --L2_reg_loss 0.015 --augment cartoon
 
 The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` where ITER = 001000, 001100, ..., 001500. Intermediate results are saved in `./log/cartoon/`. Large ITER has strong cartoon styles but at the cost of artifacts, users may select the most balanced one from 1000-1500. In the paper, we use 1400.
-
-**Remarks**: λ<sub>ID</sub> and λ<sub>reg</sub> are suggested to be tuned for each style dataset to achieve ideal performance.
 
 ### (optional) Latent Optimization and Sampling
 
@@ -191,9 +189,7 @@ python refine_exstyle.py --lr_color COLOR_LEARNING_RATE --lr_structure STRUCTURE
 By default, the code will load `instyle_code.npy`, `exstyle_code.npy` and `generator.pt` in `./checkpoint/DATASET_NAME/`. Use `--instyle_path`, `--exstyle_path`, `--ckpt` to specify other saved style codes or models. Take the cartoon dataset for example, run:
 > python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 --ckpt ./chekpoint/cartoon/generator-001400.pt cartoon
 
-The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`.
-
-**Remarks**: lr_color and lr_structure are suggested to be tuned to better fit the example styles.
+The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`. `lr_color` and `lr_structure` are suggested to be tuned to better fit the example styles.
 
 **Training sampling network.** Train a sampling network to map unit Gaussian noises to the distribution of extrinsic style codes:
 ```python
