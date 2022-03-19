@@ -21,7 +21,7 @@ class TestOptions():
         self.parser.add_argument("--model_path", type=str, default='./checkpoint/', help="path of the saved models")
         self.parser.add_argument("--model_name", type=str, default='generator.pt', help="name of the saved dualstylegan")
         self.parser.add_argument("--output_path", type=str, default='./output/', help="path of the output images")
-
+        self.parser.add_argument("--sampler_name", type=str, default='sampler.pt', help="name of the saved sampling network")
 
     def parse(self):
         self.opt = self.parser.parse_args()
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name))
     generator.load_state_dict(ckpt["g_ema"])
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, 'sampler.pt'))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.sampler_name))
     icptc.icp.netT.load_state_dict(ckpt['color'])
     icpts.icp.netT.load_state_dict(ckpt['structure'])
 
@@ -55,7 +55,9 @@ if __name__ == "__main__":
     
     with torch.no_grad():
         instyle = torch.randn(args.batch, 512).to(device)
+        # sample structure codes
         res_in = icpts.icp.netT(torch.randn(args.batch,128).to(device)).reshape(-1,7,512)
+        # sample color codes
         ada_in = icptc.icp.netT(torch.randn(args.batch,128).to(device)).reshape(-1,11,512)
 
         if args.fix_content:
@@ -64,7 +66,7 @@ if __name__ == "__main__":
             ada_in = ada_in[0:1].repeat(args.batch, 1, 1)
         if args.fix_structure:
             res_in = res_in[0:1].repeat(args.batch, 1, 1)
-
+        # concatenate two codes to form the complete extrinsic style code
         latent = torch.cat((res_in, ada_in), dim=1)
         # map into W+ space
         exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)

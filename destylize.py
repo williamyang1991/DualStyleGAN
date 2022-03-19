@@ -22,7 +22,7 @@ class TestOptions():
     def __init__(self):
 
         self.parser = argparse.ArgumentParser(description="Facial Destylization")
-        self.parser.add_argument("--style", type=str, default='cartoon', help="target style type")
+        self.parser.add_argument("style", type=str, help="target style type")
         self.parser.add_argument("--truncation", type=float, default=0.75, help="truncation for intrinsic style code (content)")
         self.parser.add_argument("--model_path", type=str, default='./checkpoint/', help="path of the saved models")
         self.parser.add_argument("--model_name", type=str, default='fintune-000600.pt', help="name of the saved fine-tuned model")
@@ -32,7 +32,7 @@ class TestOptions():
 
 
     def parse(self):
-        self.opt = self.parser.parse_args()
+        self.opt = self.parser.parse_args()        
         args = vars(self.opt)
         print('Load options')
         for name, value in sorted(args.items()):
@@ -93,9 +93,11 @@ if __name__ == "__main__":
             transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]),
         ]
     )
-
+    
+    # fine-tuned StyleGAN g'
     generator_prime = Generator(1024, 512, 8, 2).to(device)
     generator_prime.eval()
+    # orginal StyleGAN g
     generator = Generator(1024, 512, 8, 2).to(device)
     generator.eval()
 
@@ -133,7 +135,7 @@ if __name__ == "__main__":
         imgs = torch.stack(imgs, 0).to(device)
 
         with torch.no_grad():  
-            # g(z^+_e) and z^+_e
+            # reconstructed face g(z^+_e) and extrinsic style code z^+_e
             img_rec, latent_e = encoder(imgs, randomize_noise=False, return_latents=True, z_plus_latent=True)
             
         for j in range(imgs.shape[0]):
@@ -145,7 +147,7 @@ if __name__ == "__main__":
         for noise in noises:
             noise.requires_grad = True    
 
-        # z^+ to be optimized
+        # z^+ to be optimized in Eq. (1)
         latent = latent_e.detach().clone()
         latent.requires_grad = True
 
@@ -159,6 +161,7 @@ if __name__ == "__main__":
             optimizer.param_groups[0]["lr"] = lr
             latent_n = latent
 
+            # g'(z^+)
             img_gen, _ = generator_prime([latent_n], input_is_latent=False, noise=noises, z_plus_latent=True)
 
             batch, channel, height, width = img_gen.shape

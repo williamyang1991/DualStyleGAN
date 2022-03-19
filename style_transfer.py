@@ -26,10 +26,15 @@ class TestOptions():
         self.parser.add_argument("--output_path", type=str, default='./output/', help="path of the output images")
         self.parser.add_argument("--data_path", type=str, default='./data/', help="path of dataset")
         self.parser.add_argument("--align_face", action="store_true", help="apply face alignment to the content image")
-
+        self.parser.add_argument("--exstyle_name", type=str, default=None, help="name of the extrinsic style codes")
 
     def parse(self):
         self.opt = self.parser.parse_args()
+        if self.opt.exstyle_name is None:
+            if os.path.exists(os.path.join(self.opt.model_path, self.opt.style, 'refined_exstyle_code.npy')):
+                self.opt.exstyle_name = 'refined_exstyle_code.npy'
+            else:
+                self.opt.exstyle_name = 'exstyle_code.npy'        
         args = vars(self.opt)
         print('Load options')
         for name, value in sorted(args.items()):
@@ -78,15 +83,13 @@ if __name__ == "__main__":
     encoder.eval()
     encoder.to(device)
 
-    if os.path.exists(os.path.join(args.model_path, args.style, 'refined_exstyle_code.npy')):
-        exstyles = np.load(os.path.join(args.model_path, args.style, 'refined_exstyle_code.npy'),allow_pickle='TRUE').item()
-    else:
-        exstyles = np.load(os.path.join(args.model_path, args.style, 'exstyle_code.npy'),allow_pickle='TRUE').item()
+    exstyles = np.load(os.path.join(args.model_path, args.style, args.exstyle_name), allow_pickle='TRUE').item()
 
     print('Load models successfully!')
     
     with torch.no_grad():
         viz = []
+        # load content image
         if args.align_face:
             I = transform(run_alignment(args)).unsqueeze(dim=0).to(device)
             I = F.adaptive_avg_pool2d(I, 1024)
@@ -94,6 +97,7 @@ if __name__ == "__main__":
             I = load_image(args.content).to(device)
         viz += [I]
 
+        # reconstructed content image and its intrinsic style code
         img_rec, instyle = encoder(F.adaptive_avg_pool2d(I, 256), randomize_noise=False, return_latents=True, 
                                 z_plus_latent=True, return_z_plus_latent=True, resize=False)    
         img_rec = torch.clamp(img_rec.detach(), -1, 1)
@@ -104,13 +108,20 @@ if __name__ == "__main__":
             latent = torch.tensor(exstyles[stylename]).to(device)
             if args.preserve_color:
                 latent[:,7:18] = instyle[:,7:18]
+            # extrinsic styte code
             exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)
 
+        # load style image if it exists
         S = None
         if os.path.exists(os.path.join(args.data_path, args.style, 'images/train', stylename)):
             S = load_image(os.path.join(args.data_path, args.style, 'images/train', stylename)).to(device)
             viz += [S]
 
+        # style transfer 
+        # input_is_latent: instyle is not in W space
+        # z_plus_latent: instyle is in Z+ space
+        # use_res: use extrinsic style path, or the style is not transferred
+        # interp_weights: weight vector for style combination of two paths
         img_gen, _ = generator([instyle], exstyle, input_is_latent=False, z_plus_latent=True,
                               truncation=args.truncation, truncation_latent=0, use_res=True, interp_weights=args.weight)
         img_gen = torch.clamp(img_gen.detach(), -1, 1)

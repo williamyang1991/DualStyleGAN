@@ -9,6 +9,7 @@ from torch.nn import functional as F
 from torch import autograd
 from model.stylegan.op import conv2d_gradfix
 import random
+import math
     
 def visualize(img_arr):
     plt.imshow(((img_arr.detach().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8))
