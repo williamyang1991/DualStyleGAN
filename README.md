@@ -15,6 +15,21 @@ In CVPR 2022.<br>
 - [03/2022] This website is created.
 
 
+## Installation
+**Clone this repo:**
+```bash
+git clone https://github.com/williamyang1991/DualStyleGAN.git
+cd DualStyleGAN
+```
+**Dependencies:**
+
+All dependencies for defining the environment are provided in `environment/dualstylegan_env.yaml`.
+We recommend running this repository using [Anaconda](https://docs.anaconda.com/anaconda/install/):
+```bash
+conda env create -f ./environment/dualstylegan_env.yaml
+```
+
+
 ## (1) Dataset Preparation
 
 Cartoon, Caricature and Anime datasets can be downloaded from their official pages.
