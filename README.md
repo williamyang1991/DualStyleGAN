@@ -184,16 +184,16 @@ The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` w
 
 **Refine extrinsic style code.** Refine the color and structure styles to better fit the example style images.
 ```python 
-python refine_exstyle.py --style DATASET_NAME --lr_color COLOR_LEARNING_RATE --lr_structure STRUCTURE_LEARNING_RATE
+python refine_exstyle.py --lr_color COLOR_LEARNING_RATE --lr_structure STRUCTURE_LEARNING_RATE DATASET_NAME
 ```
 By default, the code will load `instyle_code.npy`, `exstyle_code.npy` and `generator.pt` in `./checkpoint/DATASET_NAME/`. Use `--instyle_path`, `--exstyle_path`, `--ckpt` to specify other saved style codes or models. Take the cartoon dataset for example, run:
-> python refine_exstyle.py --style cartoon --lr_color 0.1 --lr_structure 0.005
+> python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 cartoon
 
 The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`.
 
 **Training sampling network.** Train a sampling network to map unit Gaussian noises to the distribution of extrinsic style codes:
 ```python
-python train_sampler.py --style DATASET_NAME
+python train_sampler.py DATASET_NAME
 ```
 By default, the code will load `refined_exstyle_code.npy` or `exstyle_code.npy` in `./checkpoint/DATASET_NAME/`. Use `--exstyle_path` to specify other saved extrinsic style codes. The saved model can be found in `./checkpoint/DATASET_NAME/sampler.pt`.
 
