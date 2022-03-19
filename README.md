@@ -87,7 +87,7 @@ python style_transfer.py --content ./data/content/unsplash-rDEOVtE7vOs.jpg --ali
        --weight 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 0.6 1 1 1 1 1 1 1 
 ```
 
-<img src="./output/arcane_transfer_13_unsplash-rDEOVtE7vOs_overview.jpg">
+<img src="https://user-images.githubusercontent.com/18130694/159124661-fbb58871-7c7b-449f-95b5-83e44f5973e8.jpg" width="32%"> → <img src="./output/arcane_transfer_13_unsplash-rDEOVtE7vOs_overview.jpg" width="64%">
 
 Find more options via `python style_transfer.py  -h`
 
