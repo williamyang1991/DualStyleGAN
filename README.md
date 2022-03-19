@@ -12,6 +12,7 @@ In CVPR 2022.<br>
 
 ## Updates
 
+- [03/2022] Code is released.
 - [03/2022] This website is created.
 
 
