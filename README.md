@@ -155,7 +155,7 @@ Take the cartoon dataset for example, run
 
 The intrinsic and extrinsic style codes are saved in `./checkpoint/cartoon/instyle_code.npy` and `./checkpoint/cartoon/exstyle_code.npy`, respectively. Intermediate results are saved in `./log/cartoon/destylization/`.
 To speed up destylization, set `--batch` to large value like 16. 
-For styles severely different from real faces, set `--truncation` to small value like 0.5 to make the results more photo-realistic.
+For styles severely different from real faces, set `--truncation` to small value like 0.5 to make the results more photo-realistic (it enables DualStyleGAN to learn larger structrue deformations).
 
 ### Progressive Fine-Tuning 
 
