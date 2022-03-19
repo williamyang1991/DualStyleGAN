@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import torchvision.transforms as transforms
 import cv2
+import torch
 from torch.utils import data
 from torch.nn import functional as F
 from torch import autograd
