@@ -1,6 +1,8 @@
 # Contextual Loss
 PyTorch implementation of Contextual Loss (CX) and Contextual Bilateral Loss (CoBi).
 
+Fork from [https://github.com/S-aiueo32/contextual_loss_pytorch](https://github.com/S-aiueo32/contextual_loss_pytorch)
+
 ## Introduction
 There are many image transformation tasks whose spatially aligned data is hard to capture in the wild.
 Pixel-to-pixel or global loss functions can NOT be directly applied such unaligned data.
