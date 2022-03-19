@@ -157,6 +157,7 @@ The intrinsic and extrinsic style codes are saved in `./checkpoint/cartoon/insty
 To speed up destylization, set `--batch` to large value like 16. 
 For styles severely different from real faces, set `--truncation` to small value like 0.5 to make the results more photo-realistic (it enables DualStyleGAN to learn larger structrue deformations).
 
+
 ### Progressive Fine-Tuning 
 
 **Stage 1 & 2 Pretrain DualStyleGAN on FFHQ.** 
@@ -179,6 +180,7 @@ Take the cartoon dataset for example, run (multi-GPU enables a large batch size 
 
 The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` where ITER = 001000, 001100, ..., 001500. Intermediate results are saved in `./log/cartoon/`. Large ITER has strong cartoon styles but at the cost of artifacts, users may select the most balanced one from 1000-1500. In the paper, we use 1400.
 
+**Remarks**: λ<sub>ID</sub> and λ<sub>reg</sub> are suggested to be tuned for each style dataset to achieve ideal performance.
 
 ### (optional) Latent Optimization and Sampling
 
@@ -190,6 +192,8 @@ By default, the code will load `instyle_code.npy`, `exstyle_code.npy` and `gener
 > python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 --ckpt ./chekpoint/cartoon/generator-001400.pt cartoon
 
 The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`.
+
+**Remarks**: lr_color and lr_structure are suggested to be tuned to better fit the example styles.
 
 **Training sampling network.** Train a sampling network to map unit Gaussian noises to the distribution of extrinsic style codes:
 ```python
