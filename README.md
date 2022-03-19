@@ -187,7 +187,7 @@ The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` w
 python refine_exstyle.py --lr_color COLOR_LEARNING_RATE --lr_structure STRUCTURE_LEARNING_RATE DATASET_NAME
 ```
 By default, the code will load `instyle_code.npy`, `exstyle_code.npy` and `generator.pt` in `./checkpoint/DATASET_NAME/`. Use `--instyle_path`, `--exstyle_path`, `--ckpt` to specify other saved style codes or models. Take the cartoon dataset for example, run:
-> python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 cartoon
+> python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 --ckpt ./chekpoint/cartoon/generator-001400.pt cartoon
 
 The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`.
 
