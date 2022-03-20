@@ -115,7 +115,7 @@ python style_transfer.py --content ./data/content/unsplash-rDEOVtE7vOs.jpg --ali
 More options can be found via `python style_transfer.py  -h`.
 
 
-**Remarks**: The pSp encoder cannot perfectly encode the content image. If the style transfer result more consistent with the content image is desired, one may use latent optimization to better fit the content image or using newer StyleGAN encoders.
+**Remarks**: Our trained pSp encoder on Z+ space cannot perfectly encode the content image. If the style transfer result more consistent with the content image is desired, one may use latent optimization to better fit the content image or using other StyleGAN encoders.
 
 ### Artistic Portrait Generation
 Generate random Cartoon face images (Results are saved in the `./output/` folder):
