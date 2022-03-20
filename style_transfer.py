@@ -104,12 +104,11 @@ if __name__ == "__main__":
         viz += [img_rec]
 
         stylename = list(exstyles.keys())[args.style_id]
-        with torch.no_grad():
-            latent = torch.tensor(exstyles[stylename]).to(device)
-            if args.preserve_color:
-                latent[:,7:18] = instyle[:,7:18]
-            # extrinsic styte code
-            exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)
+        latent = torch.tensor(exstyles[stylename]).to(device)
+        if args.preserve_color:
+            latent[:,7:18] = instyle[:,7:18]
+        # extrinsic styte code
+        exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)
 
         # load style image if it exists
         S = None
