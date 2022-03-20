@@ -150,7 +150,7 @@ Download the supporting models to the `./checkpoint/` folder:
 
 ### Facial Destylization
 
-**Step 1: Prepare data.** Prepare the dataset in `./data/DatasetName/images/train/`. First create lmdb datasets:
+**Step 1: Prepare data.** Prepare the dataset in `./data/DATASET_NAME/images/train/`. First create lmdb datasets:
 ```python
 python ./model/stylegan/prepare_data.py --out LMDB_PATH --n_worker N_WORKER --size SIZE1,SIZE2,SIZE3,... DATASET_PATH
 ```
