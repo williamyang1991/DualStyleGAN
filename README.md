@@ -29,7 +29,7 @@ We recommend running this repository using [Anaconda](https://docs.anaconda.com/
 ```bash
 conda env create -f ./environment/dualstylegan_env.yaml
 ```
-We use CUDA 10.1 so `dualstylegan_env.yaml`  will install PyTorch 1.7.1. Please install PyTorch that matches your own CUDA version following [https://pytorch.org/](https://pytorch.org/).
+We use CUDA 10.1 so it will install PyTorch 1.7.1 (corresponding to [Line 22](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L22), [Line 25](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L25), [Line 26](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L26) of `dualstylegan_env.yaml`). Please install PyTorch that matches your own CUDA version following [https://pytorch.org/](https://pytorch.org/).
 
 ## (1) Dataset Preparation
 
