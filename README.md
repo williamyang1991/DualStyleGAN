@@ -67,7 +67,7 @@ Pretrained models can be downloaded from [Google Drive](https://drive.google.com
 | [pixar](https://drive.google.com/drive/folders/1ve4P8Yb4EZ9g_sRy_RCw3N74p46tNpeW?usp=sharing) | DualStyleGAN and sampling models trained on Pixar dataset, 122 extrinsic style codes |
 | [slamdunk](https://drive.google.com/drive/folders/1X345yn_YbMEHBcj7K91O-oQZ2YjVpAcI?usp=sharing) | DualStyleGAN and sampling models trained on Slamdunk dataset, 120 extrinsic style codes |
 
-The saved checkpoints is under the following folder structure:
+The saved checkpoints are under the following folder structure:
 ```
 checkpoint
 |--encoder.pt                     % Pixel2style2pixel model
@@ -86,9 +86,9 @@ Transfer the style of a default Cartoon image onto a default face:
 ```python
 python style_transfer.py 
 ```
-The result `cartoon_transfer_53_081680.jpg` are saved in the folder `.\output\`,
-where `53` is the id of the style image in Cartoon dataset, `081680` is the name of the content face image.
-An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is additionally saved to illustrate the input content image, the encoded content image, the style image (* the style image will be shown only if it is in your folder) and the result: 
+The result `cartoon_transfer_53_081680.jpg` is saved in the folder `.\output\`,
+where `53` is the id of the style image in the Cartoon dataset, `081680` is the name of the content face image.
+An corresponding overview image `cartoon_transfer_53_081680_overview.jpg` is additionally saved to illustrate the input content image, the encoded content image, the style image (* the style image will be shown only if it is in your folder), and the result: 
 
 <img src="./output/cartoon_transfer_53_081680_overview.jpg">
 
@@ -112,18 +112,18 @@ python style_transfer.py --content ./data/content/unsplash-rDEOVtE7vOs.jpg --ali
 
 <img src="https://user-images.githubusercontent.com/18130694/159124661-fbb58871-7c7b-449f-95b5-83e44f5973e8.jpg" width="32%"> → <img src="./output/arcane_transfer_13_unsplash-rDEOVtE7vOs_overview.jpg" width="64%">
 
-Find more options via `python style_transfer.py  -h`
+More options can be found via `python style_transfer.py  -h`.
 
 
 **Remarks**: The pSp encoder cannot perfectly encode the content image. If the style transfer result more consistent with the content image is desired, one may use latent optimization to better fit the content image or using newer StyleGAN encoders.
 
 ### Artistic Portrait Generation
-Generate random Cartoon face images: (Results are saved in the `./output/` folder)
+Generate random Cartoon face images (Results are saved in the `./output/` folder):
 ```python
 python generate.py 
 ```
 
-Specify the style type with `--style` and the filename of the saved images with `--name`
+Specify the style type with `--style` and the filename of the saved images with `--name`:
 ```python
 python generate.py --style arcane --name arcane_generate
 ```
@@ -135,7 +135,7 @@ Keep the intrinsic style code, extrinsic color code or extrinsic strcture code f
 python generate.py --style caricature --name caricature_generate --weight 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 --fix_content
 ```
 
-Find more options via `python generate.py -h`
+More options can be found via `python generate.py -h`.
 
 <br/>
 
@@ -150,14 +150,14 @@ Download the supporting models to the `./checkpoint/` folder:
 
 ### Facial Destylization
 
-**Step 1 Prepare data.** Prepare the dataset in `./data/DatasetName/images/train/`. First create lmdb datasets:
+**Step 1: Prepare data.** Prepare the dataset in `./data/DatasetName/images/train/`. First create lmdb datasets:
 ```python
 python ./model/stylegan/prepare_data.py --out LMDB_PATH --n_worker N_WORKER --size SIZE1,SIZE2,SIZE3,... DATASET_PATH
 ```
 For example, download 317 Cartoon images into `./data/cartoon/images/train/` and run 
 > python ./model/stylegan/prepare_data.py --out ./data/cartoon/lmdb/ --n_worker 4 --size 1024 ./data/cartoon/images/
 
-**Step 2 Fine-tune StyleGAN.** Fine-tune StyleGAN in distributed settings
+**Step 2: Fine-tune StyleGAN.** Fine-tune StyleGAN in distributed settings:
 ```python
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --batch BATCH_SIZE \
        --ckpt FFHQ_MODEL_PATH --iter ITERATIONS --style DATASET_NAME --augment LMDB_PATH
@@ -169,11 +169,11 @@ Take the cartoon dataset for example, run (batch size of 8\*4=32 is recommended)
 
 The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
 
-**Step 3 Destylize artistic portraits.** 
+**Step 3: Destylize artistic portraits.** 
 ```python
 python destylize.py --model_name FINETUNED_MODEL_NAME --batch BATCH_SIZE --iter ITERATIONS DATASET_NAME
 ```
-Take the cartoon dataset for example, run
+Take the cartoon dataset for example, run:
 > python destylize.py --model_name fintune-000600.pt --batch 1 --iter 300 cartoon
 
 The intrinsic and extrinsic style codes are saved in `./checkpoint/cartoon/instyle_code.npy` and `./checkpoint/cartoon/exstyle_code.npy`, respectively. Intermediate results are saved in `./log/cartoon/destylization/`.
@@ -183,25 +183,25 @@ For styles severely different from real faces, set `--truncation` to small value
 
 ### Progressive Fine-Tuning 
 
-**Stage 1 & 2 Pretrain DualStyleGAN on FFHQ.** 
+**Stage 1 & 2: Pretrain DualStyleGAN on FFHQ.** 
 We provide our pretrained model [generator-pretrain.pt](https://drive.google.com/file/d/1j8sIvQZYW5rZ0v1SDMn2VEJFqfRjMW3f/view?usp=sharing) at [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr). This model is obtained by:
 > python -m torch.distributed.launch --nproc_per_node=1 --master_port=8765 pretrain_dualstylegan.py --iter 3000
                           --batch 4 ./data/ffhq/lmdb/
 
-where `./data/ffhq/lmdb/` contains the lmdb data created from FFHQ dataset via `./model/stylegan/prepare_data.py`.
+where `./data/ffhq/lmdb/` contains the lmdb data created from the FFHQ dataset via `./model/stylegan/prepare_data.py`.
 
-**Stage 3 Fine-Tune DualStyleGAN on Target Domain.** Fine-tune DualStyleGAN in distributed settings
+**Stage 3: Fine-Tune DualStyleGAN on Target Domain.** Fine-tune DualStyleGAN in distributed settings:
 ```python
 python -m torch.distributed.launch --nproc_per_node=N_GPU --master_port=PORT finetune_stylegan.py --iter ITERATIONS \ 
                           --batch BATCH_SIZE --ckpt PRETRAINED_MODEL_PATH --augment DATASET_NAME
 ```
-The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). λ<sub>ID</sub> and λ<sub>reg</sub> are suggested to be tuned for each style dataset to achieve ideal performance. Find more options via `python finetune_dualstylegan.py -h`.
+The loss term weights can be specified by `--style_loss` (λ<sub>FM</sub>), `--CX_loss` (λ<sub>CX</sub>), `--perc_loss` (λ<sub>perc</sub>), `--id_loss` (λ<sub>ID</sub>) and `--L2_reg_loss` (λ<sub>reg</sub>). λ<sub>ID</sub> and λ<sub>reg</sub> are suggested to be tuned for each style dataset to achieve ideal performance. More options can be found via `python finetune_dualstylegan.py -h`.
 
-Take the cartoon dataset for example, run (multi-GPU enables a large batch size of 8\*4=32 for better performance):
+Take the Cartoon dataset as an example, run (multi-GPU enables a large batch size of 8\*4=32 for better performance):
 > python -m torch.distributed.launch --nproc_per_node=8 --master_port=8765 finetune_dualstylegan.py --iter 1500 --batch 4 --ckpt ./checkpoint/generator-pretrain.pt 
 --style_loss 0.25 --CX_loss 0.25 --perc_loss 1 --id_loss 1 --L2_reg_loss 0.015 --augment cartoon
 
-The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` where ITER = 001000, 001100, ..., 001500. Intermediate results are saved in `./log/cartoon/`. Large ITER has strong cartoon styles but at the cost of artifacts, users may select the most balanced one from 1000-1500. In the paper, we use 1400.
+The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` where ITER = 001000, 001100, ..., 001500. Intermediate results are saved in `./log/cartoon/`. Large ITER has strong cartoon styles but at the cost of artifacts, and users may select the most balanced one from 1000-1500. We use 1400 for our paper experiments.
 
 ### (optional) Latent Optimization and Sampling
 
@@ -209,7 +209,7 @@ The fine-tuned models can be found in `./checkpoint/cartoon/generator-ITER.pt` w
 ```python 
 python refine_exstyle.py --lr_color COLOR_LEARNING_RATE --lr_structure STRUCTURE_LEARNING_RATE DATASET_NAME
 ```
-By default, the code will load `instyle_code.npy`, `exstyle_code.npy` and `generator.pt` in `./checkpoint/DATASET_NAME/`. Use `--instyle_path`, `--exstyle_path`, `--ckpt` to specify other saved style codes or models. Take the cartoon dataset for example, run:
+By default, the code will load `instyle_code.npy`, `exstyle_code.npy`, and `generator.pt` in `./checkpoint/DATASET_NAME/`. Use `--instyle_path`, `--exstyle_path`, `--ckpt` to specify other saved style codes or models. Take the Cartoon dataset as an example, run:
 > python refine_exstyle.py --lr_color 0.1 --lr_structure 0.005 --ckpt ./checkpoint/cartoon/generator-001400.pt cartoon
 
 The refined extrinsic style codes are saved in `./checkpoint/DATASET_NAME/refined_exstyle_code.npy`. `lr_color` and `lr_structure` are suggested to be tuned to better fit the example styles.
