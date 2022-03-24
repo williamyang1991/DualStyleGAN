@@ -68,17 +68,19 @@ if __name__ == "__main__":
     transforms.Normalize(mean=[0.5, 0.5, 0.5],std=[0.5,0.5,0.5]),
     ])
     
-    generator = DualStyleGAN(1024, 512, 8, 2, res_index=6).to(device)
+    generator = DualStyleGAN(1024, 512, 8, 2, res_index=6)
     generator.eval()
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name), map_location=lambda storage, loc: storage)
     generator.load_state_dict(ckpt["g_ema"])
+    generator = generator.to(device)
 
     model_path = os.path.join(args.model_path, 'encoder.pt')
     ckpt = torch.load(model_path, map_location='cpu')
     opts = ckpt['opts']
     opts['checkpoint_path'] = model_path
     opts = Namespace(**opts)
+    opts.device = device
     encoder = pSp(opts)
     encoder.eval()
     encoder.to(device)
