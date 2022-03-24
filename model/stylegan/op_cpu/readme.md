@@ -11,3 +11,4 @@ https://github.com/williamyang1991/DualStyleGAN/blob/6ab383bc47ed36e9f57f0be6ab2
 https://github.com/williamyang1991/DualStyleGAN/blob/6ab383bc47ed36e9f57f0be6ab22f1ebe9c21dec/model/stylegan/model.py#L11
 
 If using GPUs, changing the above lines back to the original ones.
+ 
