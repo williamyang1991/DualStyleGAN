@@ -60,6 +60,8 @@ We also provide the script to build new datasets.
 To help users get started, we provide a Jupyter notebook found in `./notebooks/inference_playground.ipynb` that allows one to visualize the performance of DualStyleGAN.
 The notebook will download the necessary pretrained models and run inference on the images found in `./data/`.
 
+If no GPU is available, you may refer to [Inference on CPU](./model/stylegan/op_cpu#readme), and set `device = 'cpu'` in the notebook.
+
 ### Pretrained Models
 
 Pretrained models can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1GZQ6Gs5AzJq9lUL-ldIQexi0JYPKNy8b?usp=sharing) or [Baidu Cloud](https://pan.baidu.com/s/1sOpPszHfHSgFsgw47S6aAA ) (access code: cvpr):
