@@ -39,17 +39,20 @@ if __name__ == "__main__":
     args = parser.parse()
     print('*'*98)
     
-    generator = DualStyleGAN(1024, 512, 8, 2, res_index=6).to(device)
+    generator = DualStyleGAN(1024, 512, 8, 2, res_index=6)
     generator.eval()
     icptc = ICPTrainer(np.empty([0,512*11]), 128)
     icpts = ICPTrainer(np.empty([0,512*7]), 128)
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name), map_location=lambda storage, loc: storage)
     generator.load_state_dict(ckpt["g_ema"])
+    generator = generator.to(device)
 
-    ckpt = torch.load(os.path.join(args.model_path, args.style, args.sampler_name))
+    ckpt = torch.load(os.path.join(args.model_path, args.style, args.sampler_name), map_location=lambda storage, loc: storage)
     icptc.icp.netT.load_state_dict(ckpt['color'])
     icpts.icp.netT.load_state_dict(ckpt['structure'])
+    icptc.icp.netT = icptc.icp.netT.to(device)
+    icpts.icp.netT = icpts.icp.netT.to(device)
 
     print('Load models successfully!')
     
