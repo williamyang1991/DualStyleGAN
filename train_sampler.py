@@ -52,9 +52,11 @@ if __name__ == "__main__":
     print('Load extrinsic tyle codes successfully!')
     # train color code sampler 
     icptc = ICPTrainer(WC, 128)
+    icptc.icp.netT = icptc.icp.netT.to(device)
     icptc.train_icp(int(500000/WC.shape[0]))
     # train structure code sampler 
     icpts = ICPTrainer(WS, 128)
+    icpts.icp.netT = icpts.icp.netT.to(device)
     icpts.train_icp(int(500000/WS.shape[0]))
     
     torch.save(
