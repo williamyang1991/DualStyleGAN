@@ -51,7 +51,7 @@ class _ICP():
     def __init__(self, e_dim, z_dim):
         self.e_dim = e_dim
         self.z_dim = z_dim
-        self.netT = _netT(e_dim, z_dim).cuda()
+        self.netT = _netT(e_dim, z_dim)#.cuda()
 
     def train(self, z_np, opt_params):
         self.opt_params = opt_params
