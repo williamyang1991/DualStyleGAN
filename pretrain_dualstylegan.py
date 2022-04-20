@@ -166,7 +166,7 @@ def pretrain(args, loader, generator, discriminator, g_optim, d_optim, g_ema, en
             target_img = target_img.detach()
             # g(z2)
             style_img, _ = generator([real_zs[1]], None, input_is_latent=False, z_plus_latent=False, use_res=False)
-            style_img = target_img.detach()
+            style_img = style_img.detach()
             # E(g(z2))
             _, pspstyle = encoder(F.adaptive_avg_pool2d(style_img, 256), randomize_noise=False, 
                                       return_latents=True, z_plus_latent=True, return_z_plus_latent=False)
