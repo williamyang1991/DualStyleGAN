@@ -179,7 +179,7 @@ Take the cartoon dataset for example, run (batch size of 8\*4=32 is recommended)
                           --batch 4 --ckpt ./checkpoint/stylegan2-ffhq-config-f.pt --style cartoon
                           --augment ./data/cartoon/lmdb/
 
-The fine-tuned model can be found in `./checkpoint/cartoon/fintune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
+The fine-tuned model can be found in `./checkpoint/cartoon/finetune-000600.pt`. Intermediate results are saved in `./log/cartoon/`.
 
 **Step 3: Destylize artistic portraits.** 
 ```python
