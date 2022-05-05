@@ -189,7 +189,7 @@ if __name__ == "__main__":
 
             pbar.set_description(
                 (
-                    f"[{ii * args.batch:03d}/{len(files):03d}]"
+                    f"[{ii:03d}/{len(files):03d}]"
                     f" Lperc: {Lperc.item():.3f}; Lnoise: {Lnoise.item():.3f};"
                     f" LID: {LID.item():.3f}; Lreg: {Lreg.item():.3f}; lr: {lr:.3f}"
                 )
