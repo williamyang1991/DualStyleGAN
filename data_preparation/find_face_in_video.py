@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import os
 
 savename = '1'
-videpath = './video/Arcane1.mp4'
+videopath = './video/Arcane1.mp4'
 outpath = './output/'
 predictorpath = './shape_predictor_68_face_landmarks.dat'
 black_width = 89
@@ -151,4 +151,4 @@ if __name__ == "__main__":
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(predictorpath)
 
-    find_face(videpath, savename, detector, predictor) 
+    find_face(videopath, savename, detector, predictor) 
