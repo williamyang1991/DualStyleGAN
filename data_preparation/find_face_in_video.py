@@ -13,12 +13,6 @@ import matplotlib.pyplot as plt
 import os
 import argparse
 
-savename = '1'
-videopath = './video/Arcane1.mp4'
-outpath = './output/'
-predictorpath = './shape_predictor_68_face_landmarks.dat'
-black_width = 89
-
 class TestOptions():
     def __init__(self):
 
@@ -138,8 +132,8 @@ def find_face(videoname, savename, detector, predictor, min_crop):
         if i % 24 > 0: # try to find a face every 24 frames
             continue
         # crop the black regions in the movie
-        if black_width > 0:
-            frame = cv2.cvtColor(frame[black_width:-black_width], cv2.COLOR_RGB2BGR)
+        if args.black_width > 0:
+            frame = cv2.cvtColor(frame[args.black_width:-args.black_width], cv2.COLOR_RGB2BGR)
         else:
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         dets = detector(frame, 1)
@@ -160,7 +154,7 @@ def find_face(videoname, savename, detector, predictor, min_crop):
         img = Image.fromarray(frame)
         result = align_face(img, lm)
         j = j + 1
-        result.save(os.path.join(outpath, "%s_%03d_%05d.jpg"%(savename, j, i)), quality=95)
+        result.save(os.path.join(args.outpath, "%s_%03d_%05d.jpg"%(savename, j, i)), quality=95)
     videoCapture.release()    
 
 
@@ -169,9 +163,8 @@ if __name__ == "__main__":
     parser = TestOptions()
     args = parser.parse()
     print('*' * 98)
-    
-    if not os.path.exists(args.outpath):
-        os.makedirs(args.outpath)
+
+    os.makedirs(args.outpath, exists_ok=True)
 
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(args.predictorpath)
