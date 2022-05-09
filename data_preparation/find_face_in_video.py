@@ -11,12 +11,33 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import argparse
 
 savename = '1'
-videpath = './video/Arcane1.mp4'
+videopath = './video/Arcane1.mp4'
 outpath = './output/'
 predictorpath = './shape_predictor_68_face_landmarks.dat'
 black_width = 89
+
+class TestOptions():
+    def __init__(self):
+
+        self.parser = argparse.ArgumentParser(description="Find Face in Video")
+
+        self.parser.add_argument("--savename", type=str, help="the file name of the images to be saved")
+        self.parser.add_argument("--videopath", type=str, help="he file path to the moive")
+        self.parser.add_argument("--outpath", type=str, help=" the folder path to save the found face images")
+        self.parser.add_argument("--predictorpath", type=str, help="the model path to the downloaded shape_predictor_68_face_landmarks.dat")
+        self.parser.add_argument("--black_width", type=int, default=89, help="the width of the black letterboxing of the moive")
+        self.parser.add_argument("--min_crop", type=int, default=256, help="the minimum size of cropping")
+
+    def parse(self):
+        self.opt = self.parser.parse_args()
+        args = vars(self.opt)
+        print('Load options')
+        for name, value in sorted(args.items()):
+            print('%s: %s' % (str(name), str(value)))
+        return self.opt
 
 def align_face(img, lm):
     """
@@ -106,7 +127,7 @@ def align_face(img, lm):
     # Save aligned image.
     return img
 
-def find_face(videoname, savename, detector, predictor):
+def find_face(videoname, savename, detector, predictor, min_crop):
     videoCapture = cv2.VideoCapture(videoname)
     success = True
     i = 0
@@ -124,7 +145,7 @@ def find_face(videoname, savename, detector, predictor):
         dets = detector(frame, 1)
         findlm = False
         for k, d in enumerate(dets):
-            if d.width() >= 256 and d.height() >= 256:
+            if d.width() >= min_crop and d.height() >= min_crop:
                 shape = predictor(frame, d)
                 findlm = True
                 break
@@ -144,11 +165,15 @@ def find_face(videoname, savename, detector, predictor):
 
 
 if __name__ == "__main__":
+
+    parser = TestOptions()
+    args = parser.parse()
+    print('*' * 98)
     
-    if not os.path.exists(outpath):
-        os.makedirs(outpath)
+    if not os.path.exists(args.outpath):
+        os.makedirs(args.outpath)
 
     detector = dlib.get_frontal_face_detector()
-    predictor = dlib.shape_predictor(predictorpath)
+    predictor = dlib.shape_predictor(args.predictorpath)
 
-    find_face(videpath, savename, detector, predictor) 
+    find_face(args.videpath, args.savename, args.detector, predictor, args.min_crop)
