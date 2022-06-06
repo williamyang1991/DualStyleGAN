@@ -8,6 +8,16 @@ enabled = True
 weight_gradients_disabled = False
 
 
+@contextlib.contextmanager
+def no_weight_gradients():
+    global weight_gradients_disabled
+
+    old = weight_gradients_disabled
+    weight_gradients_disabled = True
+    yield
+    weight_gradients_disabled = old
+    
+    
 def conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1):
     if could_use_op(input):
         return conv2d_gradfix(
