@@ -262,6 +262,15 @@ https://user-images.githubusercontent.com/18130694/158048114-237b8b81-eff3-4033-
 <img src="https://user-images.githubusercontent.com/18130694/158049559-5450568f-170d-4847-88e1-d9bd12901966.jpg" width="48%"><img src="https://user-images.githubusercontent.com/18130694/158049562-e9971b49-ebd9-4300-bd08-34fc2473729f.jpg" width="48%">
 <img src="https://user-images.githubusercontent.com/18130694/158049563-72718807-4bef-472d-8875-71eee22ae934.jpg" width="48%"><img src="https://user-images.githubusercontent.com/18130694/158049565-0322a005-c402-40bc-8bef-9b22a8ca3fd4.jpg" width="48%">
 
+#### Comabine DualStyleGAN with State-of-the-Art Diffusion model
+
+We use [StableDiffusion](https://github.com/lowfuel/progrock-stable) to generate face images of the specified style of famous artists. 
+Trained with these images, DualStyleGAN is able to pastiche these famous artists and generate appealing results.
+
+<img src="https://user-images.githubusercontent.com/18130694/191216968-dbd0df0e-c8b8-447b-9aa1-6edaad1685f9.jpg" width="48%"><img src="https://user-images.githubusercontent.com/18130694/191217109-7a9aba10-2cfc-4981-a499-9b95ccab8080.jpg" width="48%">
+<img src="https://user-images.githubusercontent.com/18130694/191217162-9eece58d-96ac-48f3-b521-b68b950cc503.jpg" width="48%">
+
+
 ## Citation
 
 If you find this work useful for your research, please consider citing our paper:
