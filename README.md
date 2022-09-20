@@ -81,9 +81,9 @@ Pretrained models can be downloaded from [Google Drive](https://drive.google.com
 | [comic](https://drive.google.com/drive/folders/1qC2onFGs2R-XCXRQTP_yyNbY1fT0BdZG?usp=sharing) | DualStyleGAN and sampling models trained on Comic dataset, 101 extrinsic style codes |
 | [pixar](https://drive.google.com/drive/folders/1ve4P8Yb4EZ9g_sRy_RCw3N74p46tNpeW?usp=sharing) | DualStyleGAN and sampling models trained on Pixar dataset, 122 extrinsic style codes |
 | [slamdunk](https://drive.google.com/drive/folders/1X345yn_YbMEHBcj7K91O-oQZ2YjVpAcI?usp=sharing) | DualStyleGAN and sampling models trained on Slamdunk dataset, 120 extrinsic style codes |
-| [fantasy](https://drive.google.com/drive/folders/1JmimgKR_Xo-lR8n35e_V9wEicSUaJqMz?usp=sharing) | DualStyleGAN models trained on StableDiffusion generated Fantasy dataset, 137 extrinsic style codes |
-| [illustration](https://drive.google.com/drive/folders/1ESQBW5rmXqWss3yTjIUOr8Di7R_er-o8?usp=sharing) | DualStyleGAN models trained on StableDiffusion generated Illustration dataset, 156 extrinsic style codes |
-| [impasto](https://drive.google.com/drive/folders/1d0Lb-B7ozphXLywRjVLXQI0PTC5PESfn?usp=sharing) | DualStyleGAN models trained on StableDiffusion generated Impasto dataset, 120 extrinsic style codes |
+| [fantasy](https://drive.google.com/drive/folders/1JmimgKR_Xo-lR8n35e_V9wEicSUaJqMz?usp=sharing) | DualStyleGAN models trained on Fantasy dataset, 137 extrinsic style codes |
+| [illustration](https://drive.google.com/drive/folders/1ESQBW5rmXqWss3yTjIUOr8Di7R_er-o8?usp=sharing) | DualStyleGAN models trained on Illustration dataset, 156 extrinsic style codes |
+| [impasto](https://drive.google.com/drive/folders/1d0Lb-B7ozphXLywRjVLXQI0PTC5PESfn?usp=sharing) | DualStyleGAN models trained on Impasto dataset, 120 extrinsic style codes |
 
 The saved checkpoints are under the following folder structure:
 ```
