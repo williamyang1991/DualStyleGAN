@@ -15,7 +15,7 @@ In CVPR 2022.<br>
 
 ## Updates
 
-- [09/2022] Pre-trained models in three new [styles](#comabine-dualstylegan-with-state-of-the-art-diffusion-model) (feat. StableDiffusion) are released. 
+- [09/2022] Pre-trained models in three new [styles](#combine-dualstylegan-with-state-of-the-art-diffusion-model) (feat. StableDiffusion) are released. 
 - [07/2022] Source code license is updated.
 - [03/2022] Paper and supplementary video are released.
 - [03/2022] Web demo is created.
