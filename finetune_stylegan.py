@@ -272,7 +272,7 @@ def train(args, loader, generator, discriminator, g_optim, d_optim, g_ema, devic
                         #"args": args,
                         #"ada_aug_p": ada_aug_p,
                     },
-                    f"%s/%s/fintune-%06d.pt"%(args.model_path, args.style, i+1),
+                    f"%s/%s/finetune-%06d.pt"%(args.model_path, args.style, i+1),
                 )
             
 if __name__ == "__main__":
