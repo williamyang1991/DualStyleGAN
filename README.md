@@ -196,7 +196,7 @@ The fine-tuned model can be found in `./checkpoint/cartoon/finetune-000600.pt`. 
 python destylize.py --model_name FINETUNED_MODEL_NAME --batch BATCH_SIZE --iter ITERATIONS DATASET_NAME
 ```
 Take the cartoon dataset for example, run:
-> python destylize.py --model_name fintune-000600.pt --batch 1 --iter 300 cartoon
+> python destylize.py --model_name finetune-000600.pt --batch 1 --iter 300 cartoon
 
 The intrinsic and extrinsic style codes are saved in `./checkpoint/cartoon/instyle_code.npy` and `./checkpoint/cartoon/exstyle_code.npy`, respectively. Intermediate results are saved in `./log/cartoon/destylization/`.
 To speed up destylization, set `--batch` to large value like 16. 

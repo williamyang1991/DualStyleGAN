@@ -25,7 +25,7 @@ class TestOptions():
         self.parser.add_argument("style", type=str, help="target style type")
         self.parser.add_argument("--truncation", type=float, default=0.7, help="truncation for intrinsic style code (content)")
         self.parser.add_argument("--model_path", type=str, default='./checkpoint/', help="path of the saved models")
-        self.parser.add_argument("--model_name", type=str, default='fintune-000600.pt', help="name of the saved fine-tuned model")
+        self.parser.add_argument("--model_name", type=str, default='finetune-000600.pt', help="name of the saved fine-tuned model")
         self.parser.add_argument("--data_path", type=str, default='./data/', help="path of dataset")
         self.parser.add_argument("--iter", type=int, default=300, help="total training iterations")
         self.parser.add_argument("--batch", type=int, default=1, help="batch size")
