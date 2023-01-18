@@ -1,5 +1,6 @@
+import sys 
 import os
-
+#sys.path.append(os.path.abspath("/home/nmtoan/TEST/ai-customize-image/external_services/DualStyleGAN/model/stylegan/op"))
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -8,6 +9,7 @@ from torch.utils.cpp_extension import load
 
 
 module_path = os.path.dirname(__file__)
+#print('dddddddd\n\n',os.path.join(module_path, "fused_bias_act.cpp"),'\n\n\n\n')
 fused = load(
     "fused",
     sources=[
