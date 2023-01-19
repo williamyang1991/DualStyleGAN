@@ -138,7 +138,7 @@ def Init():
 
 def StyleTransfer(I):
     global transform 
-    device = "cuda"
+    device = "cpu"
     parser = TestOptions()
     args = parser.parse()
 
@@ -235,7 +235,7 @@ def StyleTransfer(I):
     return img_gen[0].cpu()
 
 def StyleTransfer2(image):
-    device = "cuda"
+    device = "cpu"
     Init()
 
 
