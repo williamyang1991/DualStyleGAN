@@ -117,11 +117,13 @@ if __name__ == "__main__":
 
         stylename = list(exstyles.keys())[args.style_id]
         latent = torch.tensor(exstyles[stylename]).to(device)
-        if args.preserve_color:
+        if args.preserve_color and not args.wplus:
             latent[:,7:18] = instyle[:,7:18]
         # extrinsic styte code
         exstyle = generator.generator.style(latent.reshape(latent.shape[0]*latent.shape[1], latent.shape[2])).reshape(latent.shape)
-
+        if args.preserve_color and args.wplus:
+            exstyle[:,7:18] = instyle[:,7:18]
+            
         # load style image if it exists
         S = None
         if os.path.exists(os.path.join(args.data_path, args.style, 'images/train', stylename)):
