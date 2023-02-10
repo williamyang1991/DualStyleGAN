@@ -27,6 +27,7 @@ class TestOptions():
         self.parser.add_argument("--data_path", type=str, default='./data/', help="path of dataset")
         self.parser.add_argument("--align_face", action="store_true", help="apply face alignment to the content image")
         self.parser.add_argument("--exstyle_name", type=str, default=None, help="name of the extrinsic style codes")
+        self.parser.add_argument("--wplus", action="store_true", help="use original pSp encoder to extract the intrinsic style code")
 
     def parse(self):
         self.opt = self.parser.parse_args()
@@ -74,11 +75,16 @@ if __name__ == "__main__":
     ckpt = torch.load(os.path.join(args.model_path, args.style, args.model_name), map_location=lambda storage, loc: storage)
     generator.load_state_dict(ckpt["g_ema"])
     generator = generator.to(device)
-
-    model_path = os.path.join(args.model_path, 'encoder.pt')
+    
+    if args.wplus:
+        model_path = os.path.join(args.model_path, 'encoder_wplus.pt')
+    else:
+        model_path = os.path.join(args.model_path, 'encoder.pt')
     ckpt = torch.load(model_path, map_location='cpu')
     opts = ckpt['opts']
     opts['checkpoint_path'] = model_path
+    if 'output_size' not in opts:
+        opts['output_size'] = 1024    
     opts = Namespace(**opts)
     opts.device = device
     encoder = pSp(opts)
@@ -87,6 +93,10 @@ if __name__ == "__main__":
 
     exstyles = np.load(os.path.join(args.model_path, args.style, args.exstyle_name), allow_pickle='TRUE').item()
 
+    z_plus_latent=not args.wplus
+    return_z_plus_latent=not args.wplus
+    input_is_latent=args.wplus    
+    
     print('Load models successfully!')
     
     with torch.no_grad():
@@ -101,7 +111,7 @@ if __name__ == "__main__":
 
         # reconstructed content image and its intrinsic style code
         img_rec, instyle = encoder(F.adaptive_avg_pool2d(I, 256), randomize_noise=False, return_latents=True, 
-                                z_plus_latent=True, return_z_plus_latent=True, resize=False)    
+                                   z_plus_latent=z_plus_latent, return_z_plus_latent=return_z_plus_latent, resize=False)  
         img_rec = torch.clamp(img_rec.detach(), -1, 1)
         viz += [img_rec]
 
@@ -123,7 +133,7 @@ if __name__ == "__main__":
         # z_plus_latent: instyle is in Z+ space
         # use_res: use extrinsic style path, or the style is not transferred
         # interp_weights: weight vector for style combination of two paths
-        img_gen, _ = generator([instyle], exstyle, input_is_latent=False, z_plus_latent=True,
+        img_gen, _ = generator([instyle], exstyle, input_is_latent=input_is_latent, z_plus_latent=z_plus_latent,
                               truncation=args.truncation, truncation_latent=0, use_res=True, interp_weights=args.weight)
         img_gen = torch.clamp(img_gen.detach(), -1, 1)
         viz += [img_gen]
