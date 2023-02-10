@@ -4,6 +4,7 @@ folder structure:
 ```
 Checkpoint
 |--encoder.pt                             % Pixel2style2pixel model
+|--encoder_wplus.pt                       % Pixel2style2pixel model (optional)
 |--shape_predictor_68_face_landmarks.dat  % Face alignment model
 |--stylegan2-ffhq-config-f.pt             % (only for training) StyleGAN model
 |--model_ir_se50.pth                      % (only for training) Pretrained IR-SE50 model for ID loss 
