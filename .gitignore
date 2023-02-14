@@ -1,1 +1,3 @@
 checkpoint/*
+__pycache__
+*.py[cod]
