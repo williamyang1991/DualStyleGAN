@@ -10,7 +10,7 @@ from torch.utils.cpp_extension import load
 
 
 module_path = os.path.dirname(__file__)
-print("dddddddd\n\n", os.path.join(module_path, "fused_bias_act.cpp"), "\n\n\n\n")
+# print("dddddddd\n\n", os.path.join(module_path, "fused_bias_act.cpp"), "\n\n\n\n")
 fused = load(
     "fused",
     sources=[

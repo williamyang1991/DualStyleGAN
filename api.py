@@ -1,11 +1,15 @@
 import sys
 import os
+from os.path import join
 import numpy as np
 import torch
+from datetime import datetime
+
 
 print("basename:    ", os.path.basename(__file__))
-print("dirname:     ", os.path.dirname(__file__))
-sys.path.append(os.path.dirname(__file__))
+CURR_PATH = os.path.dirname(__file__)
+print("dirname:     ", CURR_PATH)
+sys.path.append(CURR_PATH)
 
 from util import save_image, load_image
 import argparse
@@ -60,7 +64,7 @@ class TestOptions:
         self.parser.add_argument(
             "--model_path",
             type=str,
-            default="./checkpoint/",
+            default=join(CURR_PATH, "checkpoint"),
             help="path of the saved models",
         )
         self.parser.add_argument(
@@ -102,6 +106,7 @@ class TestOptions:
                 self.opt.exstyle_name = "refined_exstyle_code.npy"
             else:
                 self.opt.exstyle_name = "exstyle_code.npy"
+
         args = vars(self.opt)
         print("Load options")
         for name, value in sorted(args.items()):
@@ -109,51 +114,53 @@ class TestOptions:
         return self.opt
 
 
-def run_alignment(args):
-    import dlib
-    from model.encoder.align_all_parallel import align_face
+# def run_alignment(args):
+#     import dlib
+#     from model.encoder.align_all_parallel import align_face
 
-    modelname = os.path.join(args.model_path, "shape_predictor_68_face_landmarks.dat")
-    if not os.path.exists(modelname):
-        import wget, bz2
+#     modelname = os.path.join(args.model_path, "shape_predictor_68_face_landmarks.dat")
+#     if not os.path.exists(modelname):
+#         import wget, bz2
 
-        wget.download(
-            "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
-            modelname + ".bz2",
-        )
-        zipfile = bz2.BZ2File(modelname + ".bz2")
-        data = zipfile.read()
-        open(modelname, "wb").write(data)
-    predictor = dlib.shape_predictor(modelname)
-    aligned_image = align_face(filepath=args.content, predictor=predictor)
-    return aligned_image
+#         wget.download(
+#             "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
+#             modelname + ".bz2",
+#         )
+#         zipfile = bz2.BZ2File(modelname + ".bz2")
+#         data = zipfile.read()
+#         open(modelname, "wb").write(data)
+#     predictor = dlib.shape_predictor(modelname)
+#     aligned_image = align_face(filepath=args.content, predictor=predictor)
+#     return aligned_image
 
 
-def my_run_alignment(content):
-    import dlib
-    from model.encoder.align_all_parallel import align_face
+# def my_run_alignment(content):
+#     import dlib
+#     from model.encoder.align_all_parallel import align_face
 
-    modelname = os.path.join("./checkpoint/", "shape_predictor_68_face_landmarks.dat")
-    if not os.path.exists(modelname):
-        import wget, bz2
+#     modelname = os.path.join("./checkpoint/", "shape_predictor_68_face_landmarks.dat")
+#     if not os.path.exists(modelname):
+#         import wget, bz2
 
-        wget.download(
-            "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
-            modelname + ".bz2",
-        )
-        zipfile = bz2.BZ2File(modelname + ".bz2")
-        data = zipfile.read()
-        open(modelname, "wb").write(data)
-    predictor = dlib.shape_predictor(modelname)
-    aligned_image = align_face(filepath=content, predictor=predictor)
-    return aligned_image
+#         wget.download(
+#             "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2",
+#             modelname + ".bz2",
+#         )
+#         zipfile = bz2.BZ2File(modelname + ".bz2")
+#         data = zipfile.read()
+#         open(modelname, "wb").write(data)
+#     predictor = dlib.shape_predictor(modelname)
+#     aligned_image = align_face(filepath=content, predictor=predictor)
+#     return aligned_image
 
 
 def my_run_alignment2(img):
     import dlib
     from model.encoder.align_all_parallel import align_face, my_align_face
 
-    modelname = os.path.join("./checkpoint/", "shape_predictor_68_face_landmarks.dat")
+    modelname = os.path.join(
+        join(CURR_PATH, "checkpoint"), "shape_predictor_68_face_landmarks.dat"
+    )
     if not os.path.exists(modelname):
         import wget, bz2
 
@@ -164,6 +171,7 @@ def my_run_alignment2(img):
         zipfile = bz2.BZ2File(modelname + ".bz2")
         data = zipfile.read()
         open(modelname, "wb").write(data)
+
     predictor = dlib.shape_predictor(modelname)
     aligned_image = my_align_face(img, predictor=predictor)
     return aligned_image
@@ -331,16 +339,18 @@ def StyleTransfer2(image):
         # I = load_image("i.jpg").to(device)
 
     outputImage = StyleTransfer(I)
-    image_path = "o2.jpg"
+
+    now = datetime.now()
+    current_time = now.strftime("%H_%M_%S")
+    image_path = f"{CURR_PATH}/output/out_{current_time}.jpg"
+    # image_path = join(CURR_PATH, 'out.jpg');
+
     save_image(outputImage, image_path)
+    return outputImage
 
 
 if __name__ == "__main__":
     img = Image.open("i.jpg")
+    print("****")
+    # load_image("i.jpg")
     StyleTransfer2(img)
-
-
-def load_image(filename):
-    img = Image.open(filename)
-    img = transform(img)
-    return img.unsqueeze(dim=0)

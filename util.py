@@ -14,6 +14,9 @@ import math
 def visualize(img_arr):
     plt.imshow(((img_arr.detach().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8))
     plt.axis('off')
+    
+def convert_tensor2img(tensor):
+    return cv2.cvtColor(((tensor.detach().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), cv2.COLOR_RGB2BGR)
 
 def save_image(img, filename):
     tmp = ((img.detach().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8)
