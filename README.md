@@ -46,6 +46,8 @@ conda env create -f ./environment/dualstylegan_env.yaml
 ```
 We use CUDA 10.1 so it will install PyTorch 1.7.1 (corresponding to [Line 22](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L22), [Line 25](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L25), [Line 26](https://github.com/williamyang1991/DualStyleGAN/blob/main/environment/dualstylegan_env.yaml#L26) of `dualstylegan_env.yaml`). Please install PyTorch that matches your own CUDA version following [https://pytorch.org/](https://pytorch.org/).
 
+☞ Install on Windows: [here](https://github.com/williamyang1991/VToonify/issues/50#issuecomment-1443061101) and [here](https://github.com/williamyang1991/VToonify/issues/38#issuecomment-1442146800)
+
 ## (1) Dataset Preparation
 
 Cartoon, Caricature and Anime datasets can be downloaded from their official pages.
