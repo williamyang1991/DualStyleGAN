@@ -51,7 +51,7 @@ class DualStyleGAN(nn.Module):
         layers = [PixelNorm()]
         for i in range(n_mlp-6):
             layers.append(EqualLinear(512, 512, lr_mul=0.01, activation="fused_lrelu"))
-        # color transform blocks T_c
+        # structure transform blocks T_s
         self.style = nn.Sequential(*layers)
         # StyleGAN2
         self.generator = Generator(size, style_dim, n_mlp, channel_multiplier) 
@@ -66,7 +66,7 @@ class DualStyleGAN(nn.Module):
                 self.res.append(AdaResBlock(out_channel))
                 self.res.append(AdaResBlock(out_channel))
             else:
-                # structure transform block T_s
+                # color transform block T_c
                 self.res.append(EqualLinear(512, 512))
                 # FC layer is initialized with identity matrices, meaning no changes to the input latent code
                 self.res[-1].weight.data = torch.eye(512) * 512.0**0.5 + torch.randn(512, 512) * 0.01
